@@ -8,12 +8,9 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import ec.edu.ups.datos.UsuarioDAO;
-import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Notificacion;
-import ec.edu.ups.modelos.Persona;
 import ec.edu.ups.modelos.RegistroSesion;
-import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.utilidades.GeneradorClave;
@@ -24,7 +21,7 @@ import ec.edu.ups.utilidades.UtilidadCorreo;
  * realizar las operaciones de un 
  * proceso de sesión.
  */
-public class ProcesoSesionON implements ProcesoGestionRemotoON, ProcesoSesionRemotaON, Serializable {
+public class ProcesoSesionON implements ProcesoSesionRemotaON, Serializable {
 
 	@Inject
 	private UsuarioDAO usuarioDAO;
@@ -101,41 +98,5 @@ public class ProcesoSesionON implements ProcesoGestionRemotoON, ProcesoSesionRem
 		} catch (Exception e) {
 			throw new Exception("No se ha podido registrar el intento de sesión del usuario.");
 		}
-	}
-
-	@Override
-	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Usuario> listarUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Cuenta> listarCuentas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<SolicitudCredito> listarSolicitudesCredito() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Credito> listarCreditos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
