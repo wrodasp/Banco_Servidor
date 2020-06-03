@@ -52,17 +52,17 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, Serializable{
 		}
 	}
 
-    @Override
+	@Override
 	public List<Usuario> listarUsuarios() {
 		return usuarioDAO.listar();
 	}
-    
-    @Override
+
+	@Override
 	public List<Cuenta> listarCuentas() {
 		return cuentaDAO.listar();
 	}
 
-    @Override
+	@Override
 	public List<SolicitudCredito> listarSolicitudesCredito() {
 		List<SolicitudCredito> listaSolicitudCreditos = new ArrayList<>();
 		listarCuentas().forEach(cuenta -> {
@@ -73,7 +73,7 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, Serializable{
 		return listaSolicitudCreditos;
 	}
 
-    @Override
+	@Override
 	public List<Credito> listarCreditos() {
 		List<Credito> listaCreditos = new ArrayList<>();
 		listarCuentas().forEach(cuenta -> {
@@ -83,8 +83,8 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, Serializable{
 		});
 		return listaCreditos;
 	}
-
-    @Override	
+	
+	@Override
 	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin) {
 		return cuenta.getListaTransacciones().stream().filter(aux -> 
 			aux.getFecha().isAfter(fechaInicio.minusDays(1)) &&

@@ -1,0 +1,51 @@
+package ec.edu.ups.negocio;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.ejb.Remote;
+
+import ec.edu.ups.modelos.Credito;
+import ec.edu.ups.modelos.Cuenta;
+import ec.edu.ups.modelos.Cuota;
+import ec.edu.ups.modelos.SolicitudCredito;
+import ec.edu.ups.modelos.Usuario;
+import ec.edu.ups.modelos.enums.TipoCredito;
+
+/**
+ * Esta interface define método útiles
+ * para el proceso de credito de un usuario.
+ **/
+@Remote
+public interface ProcesoCreditoRemotoON {
+
+	/**
+	 * Registra la solicitud del usuario
+	 **/
+	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud) throws Exception;
+	
+	/**
+	 * Cambia el estado de la solicitud especificada a APROBADA o RECHAZADA.
+	 **/
+	public void cambiarEstadoSolicitud(Cuenta cuenta, SolicitudCredito solicitud) throws Exception;
+	
+	/**
+	 * Envia una notificación al usuario sobre la solicitud especificada.
+	 **/
+	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud) throws Exception;
+	
+	/**
+	 * Resgitra el credito en la cuenta especificada.
+	 **/
+	public void registrarCredito(Cuenta cuenta, Credito credito) throws Exception;
+	
+	/**
+	 * Genera una tabla de amortización eb base al credito.
+	 **/
+	public List<Cuota> generarAmortizacion(Credito credito) throws Exception;
+	
+	/**
+	 * Paga o abona la cuota con el monto especificado.
+	 **/
+	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception;
+}
