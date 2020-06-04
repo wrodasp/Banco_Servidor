@@ -18,7 +18,7 @@ import ec.edu.ups.utilidades.UtilidadCorreo;
  * proceso de sesión.
  */
 @Stateless
-public class ProcesoSesionON implements ProcesoSesionRemotaON, Serializable {
+public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLocalON, Serializable {
 
 	@Inject
 	private UsuarioDAO usuarioDAO;

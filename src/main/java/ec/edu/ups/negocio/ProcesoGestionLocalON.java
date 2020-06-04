@@ -22,7 +22,7 @@ public interface ProcesoGestionLocalON {
 	/**
 	 * Registra el cliente especificado en el banco.
 	 **/
-	public String registrarUsuario(Persona cliente, Usuario usuario) throws Exception;
+	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception;
 	
 	/**
 	 * Devuelve la lista completa de usuarios registrados.

@@ -1,7 +1,6 @@
 package ec.edu.ups.negocio;
 
 import javax.ejb.Local;
-import javax.ejb.Remote;
 
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Persona;
@@ -10,8 +9,8 @@ import ec.edu.ups.modelos.Persona;
  * Esta interface define métodos útiles 
  * para el proceso de cajero de un usuario.
  **/
-@Remote
-public interface ProcesoCajeroRemotoON {
+@Local
+public interface ProcesoCajeroLocalON {
 	
 	/**
 	 * Abre la cuenta bancaria para el propietario especificado.

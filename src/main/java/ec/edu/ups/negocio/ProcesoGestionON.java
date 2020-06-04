@@ -26,7 +26,7 @@ import ec.edu.ups.utilidades.UtilidadCorreo;
  * proceso de gestión.
  */
 @Stateless
-public class ProcesoGestionON implements ProcesoGestionRemotoON, Serializable {
+public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionLocalON, Serializable {
 
 	@Inject
 	private CuentaDAO cuentaDAO;

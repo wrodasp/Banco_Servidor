@@ -10,8 +10,8 @@ import ec.edu.ups.modelos.Usuario;
  * Esta interface define métodos útiles 
  * para el proceso de sesión de un usuario.
  **/
-@Remote
-public interface ProcesoSesionRemotaON {
+@Local
+public interface ProcesoSesionLocalON {
 
 	/**
 	 * Busca el usuario asociado con el correo especificado.

@@ -26,7 +26,7 @@ import ec.edu.ups.modelos.Usuario;
  * proceso de credito.
  */
 @Stateless
-public class ProcesoCreditoON implements ProcesoCreditoRemotoON, Serializable {
+public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoLocalON, Serializable {
 
 	@Inject
 	private CuentaDAO cuentaDAO;

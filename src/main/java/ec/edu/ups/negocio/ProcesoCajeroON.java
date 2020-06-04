@@ -18,7 +18,7 @@ import ec.edu.ups.modelos.enums.TipoTransaccion;
  * proceso de cajero.
  */
 @Stateless
-public class ProcesoCajeroON implements ProcesoCajeroRemotoON, Serializable {
+public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLocalON, Serializable {
 
 	@Inject 
 	private CuentaDAO cuentaDAO;

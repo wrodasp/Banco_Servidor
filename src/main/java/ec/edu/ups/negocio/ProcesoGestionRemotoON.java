@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
@@ -16,7 +17,7 @@ import ec.edu.ups.modelos.Usuario;
  * Esta inteface define métodos útiles
  * para el proceso de gestión del Banco. 
  */
-@Local
+@Remote
 public interface ProcesoGestionRemotoON {
 
 	/**

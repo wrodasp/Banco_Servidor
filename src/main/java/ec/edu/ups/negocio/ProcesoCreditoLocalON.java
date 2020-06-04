@@ -15,8 +15,8 @@ import ec.edu.ups.modelos.Usuario;
  * Esta interface define método útiles
  * para el proceso de credito de un usuario.
  **/
-@Remote
-public interface ProcesoCreditoRemotoON {
+@Local
+public interface ProcesoCreditoLocalON {
 
 	/**
 	 * Registra la solicitud del usuario
