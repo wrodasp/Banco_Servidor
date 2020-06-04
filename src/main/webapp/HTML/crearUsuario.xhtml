@@ -21,36 +21,39 @@
 							<div class="col col-md-auto">
 								<h:messages class="alert text-center" />
 								<h:outputLabel value="Cedula:" for="txtCedula" />
-								<h:inputText id="txtCedula" value="#{persona.cedula}"
+								<h:inputText id="txtCedula" value="#{registrarUsuario.persona.cedula}"
 									maxlength="10">
 									<f:validateLength minimum="10" />
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Nombre:" for="txtNombre" />
-								<h:inputText id="txtNombre" value="#{persona.nombre}">
+								<h:inputText id="txtNombre" value="#{registrarUsuario.persona.nombre}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Apellido:" for="txtApellido" />
-								<h:inputText id="txtApellido" value="#{persona.apellido}">
+								<h:inputText id="txtApellido" value="#{registrarUsuario.persona.apellido}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Correo:" for="txtCorreo" />
-								<h:inputText id="txtCorreo" value="#{usuario.correo}">
+								<h:inputText id="txtCorreo" value="#{registrarUsuario.usuario.correo}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Rol:" for="menuRol" />
-								<h:selectOneMenu id="menuRol" value="#{usuario.rol}">
-									<f:selectItems value="#{registroUsuario.tiposUsuario}"
+								<h:selectOneMenu id="menuRol" value="#{registrarUsuario.usuario.rol}">
+									<f:selectItems value="#{registrarUsuario.tiposUsuario}"
 										var="rol" itemValue="#{rol}" itemLabel="#{rol.etiqueta}" />
 								</h:selectOneMenu>
 								<br /> <br />
 								<h:commandButton id="btnRegistrar" class = "span2" style="margin-bottom: 2%;"
-									action="#{registroUsuario.registrarUsuario(persona,usuario)}"
-									value="Guardar"/>
+									action="#{registroUsuario.registrarUsuario()}"
+									value="Guardar">
+									<f:actionListener binding="#{registrarUsuario.limpiar()}"/>
+									<f:ajax render="formulario"/>
+								</h:commandButton>
 							</div>
 						</h:form>
 						</div>

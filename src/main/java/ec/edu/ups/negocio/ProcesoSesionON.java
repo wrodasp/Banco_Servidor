@@ -34,7 +34,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		try {
 			return usuarioDAO.buscar(correo);
 		} catch (Exception e) {
-			throw new Exception("No se ha encontrado el usuario.");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			);
 			return estadoSesion;
 		} catch (Exception e) {
-			throw new Exception("No existe el usuario especificado.");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			usuario.setClave(GeneradorClave.getNuevaClave(8));
 			usuarioDAO.modificar(usuario);
 		} catch(Exception e) {
-			throw new Exception("No se ha podido generar la clave.");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			usuarioDAO.modificar(usuario);
 			return notificacion.getMensaje();
 		} catch (Exception e) {
-			throw new Exception("No se ha podido notificar del intento de sesión al usuario.");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			usuario.getListaRegistroSesiones().add(registroSesion);
 			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido registrar el intento de sesión del usuario.");
+			throw new Exception(e.getMessage());
 		}
 	}
 }

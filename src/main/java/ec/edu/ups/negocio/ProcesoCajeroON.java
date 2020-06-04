@@ -35,12 +35,15 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 	@Override
 	public void abrirCuenta(Persona propietario, double montoInicial) throws Exception {
 		try {
+			if (montoInicial < 20) {
+				throw new Exception("El monto minimo es de 20$.");
+			}
 			Cuenta cuenta = new Cuenta();
 			cuenta.setPropietario(propietario);
 			depositar(cuenta, montoInicial);
 			cuentaDAO.agregar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido abrir la cuenta.");
+			throw new Exception(e.getMessage());
 		}
 		
 	}
@@ -55,7 +58,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido realizar la transacción de deposito.");
+			throw new Exception(e.getMessage());
 		}
 	}
 
@@ -69,7 +72,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido realizar la transacción de retiro.");
+			throw new Exception(e.getMessage());
 		}
 	}
 
@@ -87,7 +90,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuentaDAO.modificar(cuentaOrigen);
 			cuentaDAO.modificar(cuentaDestino);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido realizar la transacción de transferencia.");
+			throw new Exception(e.getMessage());
 		}	
 	}	
 }

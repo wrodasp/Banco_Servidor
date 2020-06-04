@@ -53,7 +53,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.getListaSolicitudes().add(solicitud);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido registrar la solicitud.");
+			throw new Exception(e.getMessage());
 		}
 		
 	}
@@ -67,7 +67,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.setListaSolicitudes(listaActualizada);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido cambiar el estado de la solicitud.");
+			throw new Exception(e.getMessage());
 		}
 		
 	}
@@ -85,7 +85,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido notificar sobre la solicitud.");
+			throw new Exception(e.getMessage());
 		}
 		
 	}
@@ -97,7 +97,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.getListaCreditos().add(credito);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido registrar el credito.");
+			throw new Exception(e.getMessage());
 		}
 	}
 
@@ -117,7 +117,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			}
 			return listaCuotas;
 		} catch (Exception e) {
-			throw new Exception("No se ha podido generar la amortizacion.");
+			throw new Exception(e.getMessage());
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.setListaCreditos(listaCreditosActualizada);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception("No se ha podido realizar el pago de la cuota.");
+			throw new Exception(e.getMessage());
 		}
 	}
 }

@@ -104,9 +104,7 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 		).collect(Collectors.toList());
 	}
 	
-	/**
-	 * Comprueba que la cedula ingresada sea válida.
-	 */
+	@Override
 	public boolean validarCedula(String cedula) {
         if (cedula.length() == 10) {
             int tercerDigito = Integer.parseInt(cedula.substring(2, 3));

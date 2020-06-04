@@ -91,7 +91,6 @@ public class Usuario implements Serializable {
 	 * Devuelve el valor del rol (CAJERO,JEFE DE CREDITO, CLIENTE).
 	 */
 	public TipoUsuario getRol() {
-		System.out.println(rol);
 		return rol;
 	}
 
