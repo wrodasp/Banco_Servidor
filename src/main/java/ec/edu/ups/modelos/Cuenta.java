@@ -53,7 +53,7 @@ public class Cuenta implements Serializable {
 	private List<Credito> listaCreditos;
 	
 	/**
-	 * Crea una nueva instancia de la clase Cuenta.
+	 * Asigna los datos de una cuenta nueva.
 	 */
 	public Cuenta() {
 		fechaApertura = LocalDate.now();

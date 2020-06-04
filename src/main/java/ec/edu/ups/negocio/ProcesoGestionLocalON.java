@@ -49,4 +49,11 @@ public interface ProcesoGestionLocalON {
 	 **/
 	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin);
 
+	/**
+	 * 
+	 * @param cedula
+	 * @return
+	 * Método que valida la cédula de un nuevo cliente
+	 */
+	public boolean validarCedula(String cedula);
 }

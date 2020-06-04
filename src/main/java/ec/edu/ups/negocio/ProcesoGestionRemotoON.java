@@ -3,7 +3,6 @@ package ec.edu.ups.negocio;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import ec.edu.ups.modelos.Credito;
@@ -50,4 +49,11 @@ public interface ProcesoGestionRemotoON {
 	 **/
 	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin);
 
+	/**
+	 * 
+	 * @param cedula
+	 * @return
+	 * Método que valida la cédula de un nuevo cliente
+	 */
+	public boolean validarCedula(String cedula);
 }

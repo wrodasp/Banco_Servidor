@@ -26,8 +26,6 @@ import ec.edu.ups.modelos.enums.TipoUsuario;
  */
 @Entity
 @Table(name = "usuarios")
-@ManagedBean
-@ViewScoped
 public class Usuario implements Serializable {
 
 	@Id

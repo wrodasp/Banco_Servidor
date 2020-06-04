@@ -37,5 +37,4 @@ public interface ProcesoSesionLocalON {
 	 * Registra el intento de inicio de sesión del usuario.
 	 **/
 	public void registrarIntentoSesion(Usuario usuario, boolean exitoso) throws Exception;
-	
 }

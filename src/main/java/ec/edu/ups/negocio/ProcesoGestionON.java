@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 
 import ec.edu.ups.datos.CuentaDAO;
@@ -27,6 +28,10 @@ import ec.edu.ups.utilidades.UtilidadCorreo;
  */
 @Stateless
 public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionLocalON, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4720176647181620435L;
 
 	@Inject
 	private CuentaDAO cuentaDAO;
@@ -40,15 +45,20 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	@Override
 	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception {
 		try {
-			usuario.setPropietario(cliente);
-			usuario.setClave(GeneradorClave.getNuevaClave(8));
-			usuarioDAO.agregar(usuario);
-			String mensaje = "Hola, bienvenido a MashiBank, desde ahora podrás usar tu " +
-			                 "usuario: " + usuario.getCorreo() + ", " + 
-					         "con la clave: " + usuario.getClave() + " para ingresar " +
-			                 "a tu cuenta en el sitio web www.mashibank.com.\n\n" +
-					         "Agredecemos tu afiliación a nosotros.";
-			UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta", mensaje);
+			if(validarCedula(cliente.getCedula())) {
+				usuario.setPropietario(cliente);
+				usuario.setClave(GeneradorClave.getNuevaClave(8));
+				usuarioDAO.agregar(usuario);
+				String mensaje = "Hola, bienvenido a MashiBank, desde ahora podrás usar tu " +
+				                 "usuario: " + usuario.getCorreo() + ", " + 
+						         "con la clave: " + usuario.getClave() + " para ingresar " +
+				                 "a tu cuenta en el sitio web www.mashibank.com.\n\n" +
+						         "Agredecemos tu afiliación a nosotros.";
+				UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta", mensaje);
+			}
+			else {
+				throw new Exception("La cédula ingresada es inválida");
+			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -93,4 +103,34 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 			aux.getFecha().isBefore(fechaFin.plusDays(1))
 		).collect(Collectors.toList());
 	}
+	
+	/**
+	 * Comprueba que la cedula ingresada sea válida.
+	 */
+	public boolean validarCedula(String cedula) {
+        if (cedula.length() == 10) {
+            int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+            if (tercerDigito < 6) {
+                int[] coefValCedula = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+                int verificador = Integer.parseInt(cedula.substring(9, 10));
+                int suma = 0;
+                int digito = 0;
+                for (int i = 0; i < (cedula.length() - 1); i++) {
+                    digito = Integer.parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
+                    suma += ((digito % 10) + (digito / 10));
+                }
+                if ((suma % 10 == 0) && (suma % 10 == verificador)) {
+                    return true;
+                } else if ((10 - (suma % 10)) == verificador) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

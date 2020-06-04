@@ -25,31 +25,41 @@
 									<div class="control-group">
 										<label class="control-label">Nombre:</label>
 										<div class="controls">
-											<input type="text" class="span11" placeholder="Ingrese su nombre" style="width: 20%;"/>
+											<input value="#{usuarioBean.persona.nombre}" type="text" class="span11" placeholder="Ingrese su nombre" style="width: 20%;"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Apellido:</label>
 										<div class="controls">
-											<input type="text" class="span11" placeholder="Ingrese su apellido" style="width: 20%;"/>
+											<input value="#{usuarioBean.persona.apellido}" type="text" class="span11" placeholder="Ingrese su apellido" style="width: 20%;"/>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Cédula:</label>
+										<div class="controls">
+											<input value="#{usuarioBean.persona.cedula}" type="text" class="span11" placeholder="Ingrese su cédula" style="width: 20%;"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Monto Inicial:</label>
 										<div class="controls">
-											<input type="text" class="span11"
-												placeholder="Ingrese el monto inicial" value="20" style="width: 20%;"/>
+											<input value="#{usuarioBean.monto}" type="text" class="span11"
+												placeholder="Ingrese el monto inicial" style="width: 20%;"/>
 										</div>
+									</div>
+									<div class="control-group" style="margin-left: 3.8%">
+										<label class="control-label">Información del contacto</label>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Correo electrónico :</label>
 										<div class="controls">
-											<input type="text" class="span11" placeholder="Ingrese su correo electrónico" style="width: 20%;"/>
+											<input value="#{usuarioBean.usuario.correo}" type="text" class="span11"
+											placeholder="Ingrese su correo electrónico" style="width: 35%;"/>
 										</div>
 									</div>
 									<div class="form-actions" align="center">
-										<button type="submit" class="btn btn-success" style="margin-right: 5%;">Crear</button>
-										<button type="submit" class="btn btn-danger" style="margin-left: 5%;">Cancelar</button>
+										<h:commandButton action="#{usuarioBean.registrarUsuario()}" value="Crear" class="btn btn-success" style="margin-right: 20%;"/>
+										<h:commandButton action="#{usuarioBean.limpiar()}" value="Cancelar" class="btn btn-danger" style="margin-left: 20%;"/>
 									</div>
 								</h:form>
 							</div>
