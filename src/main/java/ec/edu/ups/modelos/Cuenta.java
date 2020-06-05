@@ -167,4 +167,13 @@ public class Cuenta implements Serializable {
 	public void retirarDinero(double monto) {
 		saldo -= monto;
 	}
+
+	@Override
+	public String toString() {
+		return "Cuenta [id=" + id + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + ", propietario="
+				+ propietario + "]";
+	}
+	
+	
+	
 }

@@ -20,6 +20,7 @@ public class RegistroCajero
 	
 	private Cuenta cuenta;
 	
+	
 	private Transaccion transaccion;
 	
 	@PostConstruct
@@ -48,7 +49,7 @@ public class RegistroCajero
 	public String obtenerCuenta()
 	{
 		cuenta= procesoCajero.buscarCuenta(cuenta.getId());
-		System.out.println(cuenta.getPropietario());
+		System.out.println(cuenta);
 		return null;
 	}
 	
@@ -57,6 +58,17 @@ public class RegistroCajero
 	{
 		try {
 			procesoCajero.depositar(cuenta, transaccion.getMonto());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String realizaRetiro()
+	{
+		try {
+			procesoCajero.retirar(cuenta, transaccion.getMonto());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
