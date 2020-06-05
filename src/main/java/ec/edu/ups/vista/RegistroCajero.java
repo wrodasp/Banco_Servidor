@@ -2,6 +2,7 @@ package ec.edu.ups.vista;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import ec.edu.ups.modelos.Cuenta;
@@ -9,7 +10,9 @@ import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
+
 @ManagedBean
+@ViewScoped
 public class RegistroCajero 
 {
 	@Inject

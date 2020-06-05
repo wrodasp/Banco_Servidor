@@ -60,23 +60,23 @@
 											style="margin-right: 20%;" update="formulario" />
 									</div>
 
-									<h:dataTable value="#{registroCajero.cuenta}" var="cuent"
+									<h:dataTable value="#{registroCajero.cuenta.propietario}" var="person"
 										class="table">
 										<h:column>
 											<f:facet name="header">Cédula</f:facet>
-											#{cuent.propietario.cedula}
+											#{person.cedula}
 										</h:column>
 										<h:column>
 											<f:facet name="header">Nombre</f:facet>
-											#{cuent.propietario.nombre}
+											#{person.nombre}
 										</h:column>
 										<h:column>
 											<f:facet name="header">Apellido</f:facet>
-											#{cuent.propietario.apellido}
+											#{person.apellido}
 										</h:column>
 										<h:column>
 											<f:facet name="header">Saldo</f:facet>
-											#{cuent.saldo}
+											#{registroCajero.cuenta.saldo}
 										</h:column>
 									</h:dataTable>
 
