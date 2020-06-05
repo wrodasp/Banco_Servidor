@@ -18,6 +18,11 @@ public interface ProcesoCajeroLocalON {
 	public void abrirCuenta(Persona propietario, double montoInicial) throws Exception;
 	
 	/**
+	 * Busca la cuenta asociada al numero especificado.
+	 **/
+	public Cuenta buscarCuenta(int numeroCuenta);
+	
+	/**
 	 * Realiza el depósito del monto especificado en la cuenta.
 	 **/
 	public void depositar(Cuenta cuenta, double monto) throws Exception;
