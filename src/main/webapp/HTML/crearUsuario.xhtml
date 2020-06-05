@@ -21,39 +21,36 @@
 							<div class="col col-md-auto">
 								<h:messages class="alert text-center" />
 								<h:outputLabel value="Cedula:" for="txtCedula" />
-								<h:inputText id="txtCedula" value="#{registrarUsuario.persona.cedula}"
+								<h:inputText id="txtCedula" value="#{registroUsuario.persona.cedula}"
 									maxlength="10">
 									<f:validateLength minimum="10" />
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Nombre:" for="txtNombre" />
-								<h:inputText id="txtNombre" value="#{registrarUsuario.persona.nombre}">
+								<h:inputText id="txtNombre" value="#{registroUsuario.persona.nombre}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Apellido:" for="txtApellido" />
-								<h:inputText id="txtApellido" value="#{registrarUsuario.persona.apellido}">
+								<h:inputText id="txtApellido" value="#{registroUsuario.persona.apellido}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Correo:" for="txtCorreo" />
-								<h:inputText id="txtCorreo" value="#{registrarUsuario.usuario.correo}">
+								<h:inputText id="txtCorreo" value="#{registroUsuario.usuario.correo}">
 									<f:validateRequired />
 								</h:inputText>
 								<br /> <br />
 								<h:outputLabel value="Rol:" for="menuRol" />
-								<h:selectOneMenu id="menuRol" value="#{registrarUsuario.usuario.rol}">
-									<f:selectItems value="#{registrarUsuario.tiposUsuario}"
+								<h:selectOneMenu id="menuRol" value="#{registroUsuario.usuario.rol}">
+									<f:selectItems value="#{registroUsuario.tiposUsuario}"
 										var="rol" itemValue="#{rol}" itemLabel="#{rol.etiqueta}" />
 								</h:selectOneMenu>
 								<br /> <br />
 								<h:commandButton id="btnRegistrar" class = "span2" style="margin-bottom: 2%;"
-									action="#{registroUsuario.registrarUsuario()}"
-									value="Guardar">
-									<f:actionListener binding="#{registrarUsuario.limpiar()}"/>
-									<f:ajax render="formulario"/>
-								</h:commandButton>
+									action="#{registroUsuario.registrar()}"
+									value="Guardar" update="formulario" />
 							</div>
 						</h:form>
 						</div>

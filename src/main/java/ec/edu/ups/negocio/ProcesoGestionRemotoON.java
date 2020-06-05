@@ -25,6 +25,11 @@ public interface ProcesoGestionRemotoON {
 	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception;
 	
 	/**
+	 * Busca el usuario asociado con el correo especificado.
+	 **/
+	public Usuario buscarUsuario(String correo) throws Exception;
+	
+	/**
 	 * Devuelve la lista completa de usuarios registrados.
 	 **/
 	public List<Usuario> listarUsuarios();

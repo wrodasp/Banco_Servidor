@@ -45,25 +45,31 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	@Override
 	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception {
 		try {
-			if(validarCedula(cliente.getCedula())) {
+			if(usuarioDAO.buscar(usuario.getCorreo()) == null) {
 				usuario.setPropietario(cliente);
 				usuario.setClave(GeneradorClave.getNuevaClave(8));
 				usuarioDAO.agregar(usuario);
 				String mensaje = "Hola, bienvenido a MashiBank, desde ahora podrás usar tu " +
-				                 "usuario: " + usuario.getCorreo() + ", " + 
-						         "con la clave: " + usuario.getClave() + " para ingresar " +
-				                 "a tu cuenta en el sitio web www.mashibank.com.\n\n" +
-						         "Agredecemos tu afiliación a nosotros.";
-				UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta", mensaje);
-			}
-			else {
-				throw new Exception("La cédula ingresada es inválida");
+			             "usuario: " + usuario.getCorreo() + ", " + 
+					     "con la clave: " + usuario.getClave() + " para ingresar " +
+			             "a tu cuenta de usuario en el sitio web www.mashibank.com.\n\n" +
+					     "Agredecemos tu afiliación a nosotros.";
+				UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta de usuario", mensaje);
 			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 	}
 
+	@Override
+	public Usuario buscarUsuario(String correo) throws Exception {
+		try {
+			return usuarioDAO.buscar(correo);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	@Override
 	public List<Usuario> listarUsuarios() {
 		return usuarioDAO.listar();

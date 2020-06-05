@@ -14,16 +14,15 @@ import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
 @ManagedBean
 @ViewScoped
-public class RegistrarUsuario {
+public class RegistroUsuario {
 	
 	@Inject
 	private ProcesoGestionLocalON procesoGestion;
 	
 	private Persona persona;
-	
 	private Usuario usuario;
 	
-	public RegistrarUsuario() {
+	public RegistroUsuario() {
 	}
 	
 	@PostConstruct
@@ -48,7 +47,7 @@ public class RegistrarUsuario {
 		this.persona = persona;
 	}
 	
-	public String registrarUsuario() {
+	public String registrar() {
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		try {
 			if (!(persona.getCedula() == null)) {
@@ -57,6 +56,7 @@ public class RegistrarUsuario {
 					contexto.addMessage(null, 
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario registrado exitosamente.", "")
 					);
+					init();
 				} else {
 					contexto.addMessage(null, 
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "La cedula no es valida.", "")
@@ -73,10 +73,5 @@ public class RegistrarUsuario {
 	
 	public TipoUsuario[] getTiposUsuario() {
 		return new TipoUsuario[]{TipoUsuario.ADMIN, TipoUsuario.JEFE_DE_CREDITO, TipoUsuario.CAJERO} ;
-	}
-	
-	public void limpiar() {
-		persona = new Persona();
-		usuario = new Usuario();
 	}
 }

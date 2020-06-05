@@ -1,7 +1,5 @@
 package ec.edu.ups.negocio;
 
-
-import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import ec.edu.ups.modelos.Usuario;
@@ -12,11 +10,6 @@ import ec.edu.ups.modelos.Usuario;
  **/
 @Remote
 public interface ProcesoSesionRemotaON {
-
-	/**
-	 * Busca el usuario asociado con el correo especificado.
-	 **/
-	public Usuario buscarUsuario(String correo) throws Exception;
 	
 	/**
 	 * Devuelve un valor booleano indicando si las credenciales son validas.<br><br>

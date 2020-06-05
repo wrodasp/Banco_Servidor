@@ -9,9 +9,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
-
+/**
+ * Esta clase permite enviar correos electronicos.
+ */
 public class UtilidadCorreo {
 
+	/**
+	 * Envia un correo electronico a la direccion especificada.
+	 */
 	public static void enviarCorreo(String correoDestino, String asunto, String contenido) {
 		String usuario = "willyson43@hotmail.com";
 		String clave = "CodeLyoko";

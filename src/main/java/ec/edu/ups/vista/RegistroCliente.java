@@ -15,7 +15,7 @@ import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
 @ManagedBean
 @ViewScoped
-public class RegistrarCliente {
+public class RegistroCliente {
 	
 	@Inject
 	private ProcesoGestionLocalON procesoGestion;
@@ -27,7 +27,7 @@ public class RegistrarCliente {
 	private Usuario usuario;
 	private double monto;
 	
-	public RegistrarCliente() {
+	public RegistroCliente() {
 	}
 	
 	@PostConstruct
@@ -61,22 +61,29 @@ public class RegistrarCliente {
 		this.persona = persona;
 	}
 	
-	public String registrarCliente() {
-		usuario.setRol(TipoUsuario.CLIENTE);
+	public String registrar() {
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		try {
-			if (!(persona.getCedula() == null)) {
-				if(procesoGestion.validarCedula(persona.getCedula())) {
-					procesoGestion.registrarUsuario(persona, usuario);
-					procesoCajero.abrirCuenta(persona, monto);;
-					contexto.addMessage(null, 
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente registrado exitosamente.", "")
-					);
-				} else {
-					contexto.addMessage(null, 
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "La cedula no es valida.", "")
-					);
+			if (monto >= 20) {
+				if (!(persona.getCedula() == null)) {
+					if(procesoGestion.validarCedula(persona.getCedula())) {
+						usuario.setRol(TipoUsuario.CLIENTE);
+						procesoGestion.registrarUsuario(persona, usuario);
+						procesoCajero.abrirCuenta(persona, monto);;
+						contexto.addMessage(null, 
+							new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente registrado exitosamente.", "")
+						);
+						init();
+					} else {
+						contexto.addMessage(null, 
+							new FacesMessage(FacesMessage.SEVERITY_INFO, "La cedula no es valida.", "")
+						);
+					}
 				}
+			} else {
+				contexto.addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "El monto minimo es de 20$.", "")
+				);
 			}
 		} catch (Exception e) {
 			contexto.addMessage(null, 
@@ -84,15 +91,5 @@ public class RegistrarCliente {
 			);
 		}
 		return null;
-	}
-	
-	public TipoUsuario[] getTiposUsuario() {
-		return new TipoUsuario[]{TipoUsuario.ADMIN, TipoUsuario.JEFE_DE_CREDITO, TipoUsuario.CAJERO} ;
-	}
-	
-	public void limpiar() {
-		persona = new Persona();
-		usuario = new Usuario();
-		monto = 20;
 	}
 }

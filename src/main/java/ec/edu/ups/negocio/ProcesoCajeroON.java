@@ -35,13 +35,9 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 	@Override
 	public void abrirCuenta(Persona propietario, double montoInicial) throws Exception {
 		try {
-			if (montoInicial < 20) {
-				throw new Exception("El monto minimo es de 20$.");
-			}
 			Cuenta cuenta = new Cuenta();
 			cuenta.setPropietario(propietario);
 			depositar(cuenta, montoInicial);
-			cuentaDAO.agregar(cuenta);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

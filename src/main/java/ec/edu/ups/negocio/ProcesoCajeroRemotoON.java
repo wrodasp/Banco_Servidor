@@ -1,6 +1,5 @@
 package ec.edu.ups.negocio;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
 
 import ec.edu.ups.modelos.Cuenta;

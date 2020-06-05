@@ -30,18 +30,9 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 	}
 	
 	@Override
-	public Usuario buscarUsuario(String correo) throws Exception {
-		try {
-			return usuarioDAO.buscar(correo);
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-	}
-	
-	@Override
 	public boolean validarCredenciales(String correo, String clave) throws Exception {
 		try {
-			Usuario usuario = buscarUsuario(correo);
+			Usuario usuario = usuarioDAO.buscar(correo);
 			boolean estadoSesion = usuario.getClave().equals(clave);
 			String mensajeNotificado = notificarIntentoSesion(usuario, estadoSesion);
 			registrarIntentoSesion(usuario, estadoSesion);
