@@ -2,8 +2,6 @@ package ec.edu.ups.modelos;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -75,5 +73,10 @@ public class Persona implements Serializable {
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre + " " + apellido;
 	}
 }
