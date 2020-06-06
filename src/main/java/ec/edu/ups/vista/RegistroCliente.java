@@ -26,8 +26,6 @@ public class RegistroCliente {
 	private Persona persona;
 	private Usuario usuario;
 	private double monto;
-	private String user;
-	private String clave;
 	
 	public RegistroCliente() {
 	}
@@ -53,22 +51,6 @@ public class RegistroCliente {
 
 	public void setProcesoCajero(ProcesoCajeroLocalON procesoCajero) {
 		this.procesoCajero = procesoCajero;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
 	}
 
 	public Usuario getUsuario() {
@@ -125,20 +107,5 @@ public class RegistroCliente {
 			);
 		}
 		return null;
-	}
-
-	public void loguear() {
-		FacesContext contexto = FacesContext.getCurrentInstance();
-		try {
-			usuario = procesoGestion.loguear(user, clave);
-			usuario.getCorreo();
-			contexto.addMessage(null, 
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Autenticado con éxito.", "")
-				);
-		} catch (Exception e) {
-			contexto.addMessage(null, 
-					new FacesMessage(FacesMessage.SEVERITY_WARN, "Fallo al loguear: "+e.getMessage(),"")
-				);
-		}
 	}
 }

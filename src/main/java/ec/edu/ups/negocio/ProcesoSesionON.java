@@ -30,7 +30,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 	}
 	
 	@Override
-	public boolean validarCredenciales(String correo, String clave) throws Exception {
+	public Usuario validarCredenciales(String correo, String clave) throws Exception {
 		try {
 			Usuario usuario = usuarioDAO.buscar(correo);
 			boolean estadoSesion = usuario.getClave().equals(clave);
@@ -44,7 +44,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			UtilidadCorreo.enviarCorreo(correo, "Intento de inicion de sesión", 
 				mensajeNotificado + "\n\n" + extra
 			);
-			return estadoSesion;
+			return usuario;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

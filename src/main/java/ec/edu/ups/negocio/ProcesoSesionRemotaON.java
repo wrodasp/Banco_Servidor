@@ -14,7 +14,7 @@ public interface ProcesoSesionRemotaON {
 	/**
 	 * Devuelve un valor booleano indicando si las credenciales son validas.<br><br>
 	 **/
-	public boolean validarCredenciales(String correo, String clave) throws Exception;
+	public Usuario validarCredenciales(String correo, String clave) throws Exception;
 	
 	/**
 	 * Genera una nueva clave para el usuario.

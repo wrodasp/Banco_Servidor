@@ -31,6 +31,14 @@ public class RegistroUsuario {
 		usuario = new Usuario();
 	}
 	
+	public ProcesoGestionLocalON getProcesoGestion() {
+		return procesoGestion;
+	}
+
+	public void setProcesoGestion(ProcesoGestionLocalON procesoGestion) {
+		this.procesoGestion = procesoGestion;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

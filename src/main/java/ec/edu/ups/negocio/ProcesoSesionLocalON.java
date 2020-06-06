@@ -13,9 +13,9 @@ import ec.edu.ups.modelos.Usuario;
 public interface ProcesoSesionLocalON {
 	
 	/**
-	 * Devuelve un valor booleano indicando si las credenciales son validas.<br><br>
+	 * Devuelve un valor booleano indicando si las credenciales son validas.
 	 **/
-	public boolean validarCredenciales(String correo, String clave) throws Exception;
+	public Usuario validarCredenciales(String correo, String clave) throws Exception;
 	
 	/**
 	 * Genera una nueva clave para el usuario.
