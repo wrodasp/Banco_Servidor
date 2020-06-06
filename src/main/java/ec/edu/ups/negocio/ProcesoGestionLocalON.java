@@ -65,5 +65,5 @@ public interface ProcesoGestionLocalON {
 	 * @return
 	 * Método para validar que el usuario esté registrado en el sistema
 	 */
-	public Usuario loguear(String usuario, String clave) throws Exception;
+	//public Usuario loguear(String usuario, String clave) throws Exception;
 }
