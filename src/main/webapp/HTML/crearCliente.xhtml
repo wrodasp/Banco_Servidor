@@ -5,7 +5,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
 <h:head>
+<ui:define name="title">Crear Cliente</ui:define>
 </h:head>
+
 <ui:composition template="index.html">
 	<body>
 		<ui:define name="formCliente">
@@ -57,6 +59,11 @@
 										<h:commandButton action="#{registroCliente.registrar()}" 
 										                 value="Guardar" 
 										                 class="btn btn-success" 
+										                 style="margin-right: 20%;"
+										                 update="formulario"/>
+										<h:commandButton action="#{registroCliente.init()}" 
+										                 value="Cancelar" 
+										                 class="btn btn-danger" 
 										                 style="margin-right: 20%;"
 										                 update="formulario"/>
 									</div>

@@ -69,4 +69,22 @@ public class UsuarioDAO {
 		});
 		return usuarios;
 	}
+
+	/**
+	 * Método que retorna el usuario logueado en caso de estar registrado
+	 * @param usuario
+	 * @param clave
+	 * @return
+	 */
+	public Usuario loguear(String usuario, String clave) throws Exception{
+		try {
+			List<Usuario> usuarios = manager.createNativeQuery("SELECT * FROM Usuarios WHERE correo = '"+usuario+"' AND clave = '"+clave+"'", Usuario.class).getResultList();
+			if(usuarios.size()==0) {
+				return null;
+			}
+			return (Usuario)usuarios.get(0);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }

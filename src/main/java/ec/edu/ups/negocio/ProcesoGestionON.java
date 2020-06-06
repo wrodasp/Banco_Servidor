@@ -137,4 +137,8 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
             return false;
         }
     }
+
+	public Usuario loguear(String usuario, String clave) throws Exception{
+		return usuarioDAO.loguear(usuario, clave);
+	}
 }
