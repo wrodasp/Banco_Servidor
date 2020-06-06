@@ -105,6 +105,5 @@ public class ResumenCuenta {
 				 					  .filter(t -> t.getFecha().isBefore(fechaFin))
 				 					  .filter(t -> t.getTipo() == tipoMovimiento)
 				 					  .collect(Collectors.toList());
-		System.out.println(movimientosRealizados.size());
 	}
 }
