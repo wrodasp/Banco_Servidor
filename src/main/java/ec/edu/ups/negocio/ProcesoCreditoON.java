@@ -18,6 +18,7 @@ import ec.edu.ups.modelos.Cuota;
 import ec.edu.ups.modelos.Notificacion;
 import ec.edu.ups.modelos.Persona;
 import ec.edu.ups.modelos.SolicitudCredito;
+import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
 
 /**
@@ -138,4 +139,11 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	
+	@Override
+	public List<Credito> listarCreditos(Cuenta cuenta) {
+		return cuenta.getListaCreditos();	
+	}
+	
 }

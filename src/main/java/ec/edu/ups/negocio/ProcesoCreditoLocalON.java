@@ -46,4 +46,9 @@ public interface ProcesoCreditoLocalON {
 	 * Paga o abona la cuota con el monto especificado.
 	 **/
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception;
+
+	/**
+	 * Muestra el total de creditos de una persona
+	 */
+	public List<Credito> listarCreditos(Cuenta cuenta);
 }
