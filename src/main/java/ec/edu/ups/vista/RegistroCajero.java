@@ -78,8 +78,4 @@ public class RegistroCajero
 		}
 		return null;
 	}
-	
-	
-	
-
 }

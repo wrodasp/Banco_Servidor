@@ -7,9 +7,9 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Matrix Admin</title>
+	<title>Mashi Bank</title>
 </h:head>
-<ui:composition template="templateSesionUsuario.xhtml">
+<ui:composition template="plantillaSesionUsuario.xhtml">
 	<body>
 		<ui:define name="formCuenta">
 		<div class="container-fluid">
@@ -21,6 +21,7 @@
 						<div align="center" style="margin-top:2%">
 						<h:outputLabel value="Nro. Cuenta: #{resumenCuenta.cuenta.id}" class="text-left" style="margin-left:5%;"/><br/>
 						<h:outputLabel value="Propietario: #{resumenCuenta.cuenta.propietario.toString()}" class="text-left" style="margin-left:5%;"/><br/>
+						<h:outputLabel value="Fecha de apertura: #{resumenCuenta.cuenta.fechaApertura.format(resumenCuenta.formatoFecha)}" class="text-left" style="margin-left:5%;"/><br/>
 						<h:outputLabel value="Ultima transaccion: #{resumenCuenta.determinarUltimaTransaccion()}" class="text-left" style="margin-left:5%;"/><br/>
 						<h:outputLabel value="Saldo actual: #{resumenCuenta.cuenta.saldo}" class="text-left" style="margin-left:5%;"/><br/>
 					</div>

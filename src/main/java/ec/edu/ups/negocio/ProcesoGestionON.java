@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 
 import ec.edu.ups.datos.CuentaDAO;
@@ -137,6 +136,4 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
             return false;
         }
     }
-
-
 }

@@ -1,53 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
 <h:head>
-<ui:define name="title">Login</ui:define>
+        <title>Mashi Bank</title><meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="css/matrix-login.css" />
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
 </h:head>
-<ui:composition template="index.html">
-	<body>
-		<ui:define name="formCliente">
-			<div class="container-fluid">
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="widget-box" >
-							<div class="widget-content nopadding" style="color: black">
-							<div align="center">
-							<img src="img/logoFull.jpg" width="40%" height="5" style="margin-bottom: 2%"/>
-							</div>
-								<h:form id="formulario" class="form-horizontal">
-									<h:messages class="alert text-center"/>
-									<div align="center">
-										Usuario <h:inputText value="#{loginUsuario.correo}"
-											style="width: 20%;margin-left: 10%;" id = "usuario">
-											<f:validateRequired/>
-											</h:inputText>
-									</div>
-									<div style="margin-bottom: 2%"/>
-									<div align="center">
-										Contraseña <h:inputText value="#{loginUsuario.clave}"
-											style="width: 20%;margin-left: 7.8%;margin-bottom: 2%;" id = "contraseña">
-											<f:validateRequired/>
-											</h:inputText>
-									</div>
-									<div style="margin-bottom: 2%" class="control-group" align="center">
-										<div align="center">
-										<h:commandButton action="#{loginUsuario.loguear()}" 
-											                 value="Ingresar" 
-											                 class="btn btn-success"
-											                 update="formulario"/>
-										</div>
-									</div>
-								</h:form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</ui:define>
-	</body>
-</ui:composition>
+    <body>
+        <ui:insert name="formLogin">
+        </ui:insert>
+        <script src="js/jquery.min.js"></script>  
+        <script src="js/matrix.login.js"></script> 
+    </body>
 </html>
