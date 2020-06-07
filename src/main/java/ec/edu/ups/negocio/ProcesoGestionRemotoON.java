@@ -8,6 +8,7 @@ import javax.ejb.Remote;
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Persona;
+import ec.edu.ups.modelos.RegistroSesion;
 import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
@@ -59,11 +60,11 @@ public interface ProcesoGestionRemotoON {
 	 */
 	public boolean validarCedula(String cedula);
 	
+	
+
 	/**
-	 * @param usuario
-	 * @param clave
-	 * @return
-	 * Método para validar que el usuario esté registrado en el sistema
+	 * Devuelve la lista de registros de sesion 
 	 */
-	//public Usuario loguear(String usuario, String clave) throws Exception;
+	public List<RegistroSesion> listarSesiones();
+	
 }

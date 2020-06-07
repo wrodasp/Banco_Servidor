@@ -14,6 +14,7 @@ import ec.edu.ups.datos.UsuarioDAO;
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Persona;
+import ec.edu.ups.modelos.RegistroSesion;
 import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
@@ -136,4 +137,19 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
             return false;
         }
     }
+	
+
+	@Override
+	public List<RegistroSesion> listarSesiones()
+	{
+		List<RegistroSesion> listaSesiones = new ArrayList<>();
+		listarUsuarios().forEach(usuario ->{
+			usuario.getListaRegistroSesiones().forEach(registroSesion ->
+			listaSesiones.add(registroSesion));
+		});
+		return listaSesiones;
+	}
+	
+	
+	
 }

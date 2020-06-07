@@ -1,11 +1,14 @@
 package ec.edu.ups.negocio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import ec.edu.ups.datos.UsuarioDAO;
+import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Notificacion;
 import ec.edu.ups.modelos.RegistroSesion;
 import ec.edu.ups.modelos.Usuario;
@@ -87,4 +90,11 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	
+
+	
+	
+	
+
 }
