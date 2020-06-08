@@ -39,15 +39,15 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			boolean estadoSesion = usuario.getClave().equals(clave);
 			String mensajeNotificado = notificarIntentoSesion(usuario, estadoSesion);
 			registrarIntentoSesion(usuario, estadoSesion);
-			String extra = estadoSesion? "": "Has sido tú?. Si no, entonces genera una\n" +
-			                                 "nueva clave desde de cuenta online. Si no\n" +
-					                         "tienes accesso entonces acercate a una sucursal\n" +
-			                                 "de MashiBank y pide que generen una nueva clave\n" +
+			String extra = estadoSesion? "": "Has sido tú?. Si no, entonces genera una " +
+			                                 "nueva clave desde de cuenta online. Si no " +
+					                         "tienes accesso entonces acercate a una sucursal " +
+			                                 "de MashiBank y pide que generen una nueva clave " +
 					                         "para ti.";
-			UtilidadCorreo.enviarCorreo(correo, "Intento de inicion de sesión", 
+			UtilidadCorreo.enviarCorreo(correo, "Intento de inicio de sesión", 
 				mensajeNotificado + "\n\n" + extra
 			);
-			return usuario;
+			return estadoSesion? usuario: null;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -90,11 +90,4 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 			throw new Exception(e.getMessage());
 		}
 	}
-	
-	
-
-	
-	
-	
-
 }

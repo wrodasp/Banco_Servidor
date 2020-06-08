@@ -3,6 +3,7 @@ package ec.edu.ups.modelos;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.enterprise.inject.Typed;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class RegistroSesion implements Serializable {
 	@Column(nullable = false)
 	private int id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "TINYINT", length = 1)
 	private boolean exitoso;
 	
 	@Column(nullable = false)

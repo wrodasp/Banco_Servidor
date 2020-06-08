@@ -21,24 +21,24 @@
 								<h:form id="formulario" class="form-horizontal">
 									<h:messages class="alert text-center"/>
 									<div align="center">
-										Usuario <h:inputText value="#{loginUsuario.usuario.correo}"
+										Usuario <h:inputText value="#{loginUsuario.correo}"
 											style="width: 20%;margin-left: 10%;" id = "usuario">
 											<f:validateRequired/>
 											</h:inputText>
 									</div>
 									<div style="margin-bottom: 2%"/>
 									<div align="center">
-										Contraseña <h:inputSecret value="#{loginUsuario.usuario.clave}"
-											style="width: 20%;margin-left: 7.8%;margin-bottom: 2%;" id = "contraseña">
+										Contraseña <h:inputSecret value="#{loginUsuario.clave}"
+											style="width: 20%;margin-left: 7.8%;margin-bottom: 2%;" id = "clave">
 											<f:validateRequired/>
 											</h:inputSecret>
 									</div>
 									<div style="margin-bottom: 2%" class="control-group" align="center">
 										<h:commandButton actionListener="#{loginUsuario.iniciarSesion()}" 
-											                 value="Iniciar Sesion" 
-											                 class="btn btn-success text-center"
-											                 update="formulario"/>
-										
+											             value="Iniciar Sesion" 
+											             class="btn btn-success text-center">
+											<f:ajax execute="usuario clave" render="formulario"/>
+										</h:commandButton>
 									</div>
 								</h:form>
 							</div>

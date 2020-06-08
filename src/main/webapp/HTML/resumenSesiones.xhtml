@@ -21,6 +21,8 @@
 						<div align="center" style="margin-top:2%">
 						<h:outputLabel value="Nro. Cuenta: #{resumenCuenta.cuenta.id}" class="text-left" style="margin-left:5%;"/><br/>
 						<h:outputLabel value="Propietario: #{resumenCuenta.cuenta.propietario.toString()}" class="text-left" style="margin-left:5%;"/><br/>
+						<h:outputLabel value="Fecha de apertura: #{resumenCuenta.cuenta.fechaApertura.format(resumenCuenta.formatoFecha)}" class="text-left" style="margin-left:5%;"/><br/>
+						<h:outputLabel value="Saldo actual: #{resumenCuenta.cuenta.saldo}" class="text-left" style="margin-left:5%;"/><br/>
 					</div>
 					</div>
 				</div>
@@ -31,19 +33,19 @@
 					<div class="widget-box">
 						<div class="widget-content nopadding" style="">
 						<h:form>
-						<h5 align="left" style="margin-left:5%; margin-top: 2%; margin-bottom: 1%;">Resumen de Sesiones</h5>
+						<h5 align="left" style="margin-left:5%; margin-top: 2%; margin-bottom: 1%;">Intentos de Sesion</h5>
 						<table style="margin-left: 5%;">
 
 						</table>
 						<div style="position:relative; height:100px; overflow:auto; display: block;margin-left:5%; margin-right: 5%;margin-bottom:2%;">
-						<h:dataTable id="movimientos" value="#{resumenSesion.listaSesion}" var="sesion" class="table">
+						<h:dataTable id="movimientos" value="#{resumenSesion.usuario.listaRegistroSesiones}" var="sesion" class="table">
 								<h:column class="span7">
 									<f:facet name="header">Fecha</f:facet>
 									<label class="text-center">#{sesion.fecha}</label>
 								</h:column>
 								<h:column class="span7">
 									<f:facet name="header">Estado</f:facet>
-									<label class="text-center">#{sesion.exitoso}</label>
+									<label class="text-center">#{resumenSesion.estadoSesion(sesion)}</label>
 								</h:column>
 							</h:dataTable>
 						</div>

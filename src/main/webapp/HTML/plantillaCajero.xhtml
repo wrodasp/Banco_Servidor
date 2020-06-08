@@ -34,11 +34,14 @@
 <!--close-top-Header-menu-->
 <!--sidebar-menu-->
 <div id="sidebar">
+  <h:form>
   <ul>
-    <li> <a href="crearCliente.xhtml"><i class="icon icon-signal"></i> <span>Clientes</span></a> </li>
-    <li> <a href="depositoCajero.xhtml"><i class="icon icon-inbox"></i> <span>Deposito</span></a> </li>
+    <li><i class="icon icon-share-alt"></i><span class="text"><h:commandLink action="crearCliente.xhtml" value="Clientes"/></span></li>
+    <li><i class="icon icon-share-alt"></i><span class="text"><h:commandLink action="depositoCajero.xhtml" value="Depositos"/></span></li>
+    <li><i class="icon icon-share-alt"></i><span class="text"><h:commandLink action="retiroCajero.xhtml" value="Retiros"/></span></li>
     <li><i class="icon icon-share-alt"></i><span class="text"><h:commandLink action="#{loginUsuario.cerrarSesion()}" value="Cerrar Sesion"/></span></li>
   </ul>
+  </h:form>
 </div>
 <!--sidebar-menu-->
 

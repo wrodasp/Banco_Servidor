@@ -17,27 +17,35 @@ public class LoginUsuario {
 
 	@Inject
 	private ProcesoSesionLocalON procesoSesionON;
-	private Usuario usuario;
+	private String correo;
+	private String clave;
 
 	public LoginUsuario() {
 	}
 
 	@PostConstruct
 	public void init() {
-		usuario = new Usuario();
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	
+	public String getCorreo() {
+		return correo;
+	}
+	
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+	
+	public String getClave() {
+		return clave;
 	}
 
 	public void iniciarSesion() {
 		try {
-			usuario = procesoSesionON.validarCredenciales(usuario.getCorreo(), usuario.getClave());
+			Usuario usuario = procesoSesionON.validarCredenciales(correo, clave);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 			if (usuario.getRol() == TipoUsuario.ADMIN) {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("crearUsuario.xhtml?faces-redirect=true");

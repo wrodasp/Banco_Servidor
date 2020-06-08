@@ -31,7 +31,6 @@ public class ResumenCuenta {
 	private List<Transaccion> movimientosRealizados;
 	
 	public ResumenCuenta() {
-		cuenta = new Cuenta();
 	}
 	
 	@PostConstruct
