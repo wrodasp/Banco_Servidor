@@ -29,6 +29,15 @@ public class RegistroUsuario {
 	public void init() {
 		persona = new Persona();
 		usuario = new Usuario();
+		Usuario userSesion = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		try {
+			if(userSesion.getRol()!=TipoUsuario.ADMIN) {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			}
+		} catch (Exception e) {
+			
+		}
 	}
 	
 	public ProcesoGestionLocalON getProcesoGestion() {

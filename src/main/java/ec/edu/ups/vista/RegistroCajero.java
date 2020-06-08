@@ -3,10 +3,13 @@ package ec.edu.ups.vista;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Transaccion;
+import ec.edu.ups.modelos.Usuario;
+import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
@@ -15,9 +18,6 @@ import ec.edu.ups.negocio.ProcesoGestionLocalON;
 @ViewScoped
 public class RegistroCajero 
 {
-	@Inject
-	private ProcesoGestionLocalON procesoGestion;
-	
 	@Inject
 	private ProcesoCajeroLocalON procesoCajero;
 	
@@ -31,6 +31,15 @@ public class RegistroCajero
 	{
 		cuenta = new Cuenta();
 		transaccion = new Transaccion();
+		Usuario userSesion = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		try {
+			if(userSesion.getRol()!=TipoUsuario.CAJERO) {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			}
+		} catch (Exception e) {
+			
+		}
 	}
 
 	public Cuenta getCuenta() {
