@@ -11,7 +11,6 @@ import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
-import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
 
 @ManagedBean
