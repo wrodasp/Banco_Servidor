@@ -18,8 +18,8 @@ public class UtilidadCorreo {
 	 * Envia un correo electronico a la direccion especificada.
 	 */
 	public static void enviarCorreo(String correoDestino, String asunto, String contenido) {
-		String usuario = "willyson43@hotmail.com";
-		String clave = "CodeLyoko";
+		String usuario = "mbcorreoempresarial@hotmail.com";
+		String clave = "Tudineroseguro";
 		Properties propiedades = new Properties();
 		propiedades.setProperty("mail.smtp.host", "smtp.live.com");
 		propiedades.setProperty("mail.smtp.starttls.enable", "true");
