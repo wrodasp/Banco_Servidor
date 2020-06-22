@@ -86,7 +86,9 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			transaccionDeposito.setMonto(monto);
 			transaccionDeposito.setTipo(TipoTransaccion.DEPOSITO);
 			cuentaOrigen.getListaTransacciones().add(transaccionRetiro);
+			cuentaOrigen.retirarDinero(monto);
 			cuentaDestino.getListaTransacciones().add(transaccionDeposito);
+			cuentaDestino.depositarDinero(monto);
 			cuentaDAO.modificar(cuentaOrigen);
 			cuentaDAO.modificar(cuentaDestino);
 		} catch (Exception e) {
