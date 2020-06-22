@@ -56,5 +56,14 @@ public class ServiciosSOAP {
 	}
 	
 	
+	
     //Realizar un retiro
+	public boolean retirar(int cuentaOrigen, double monto) throws Exception {
+		try {
+			cajero.retirar(cajero.buscarCuenta(cuentaOrigen), monto);
+			return true;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }
