@@ -46,6 +46,15 @@ public class ServiciosSOAP {
 	}
 	
 	//Realizar un deposito
+	public boolean depositar(int cuentaOrigen, double monto) throws Exception {
+		try {
+			cajero.depositar(cajero.buscarCuenta(cuentaOrigen), monto);
+			return true;
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
 	
     //Realizar un retiro
 }
