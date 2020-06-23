@@ -9,8 +9,13 @@ import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
+/**
+ * Esta clase permite define un servicio
+ * web para el sistema bancario.
+ */
 @WebService
 public class ServiciosSOAP {
+	
 	@Inject
 	private ProcesoSesionLocalON sesion;
 	
@@ -18,15 +23,10 @@ public class ServiciosSOAP {
 	private ProcesoCajeroLocalON cajero;
 	
 	/**
-	 * Servicio para validar las credenciales del usuario
-	 * Made by Byron Calva
-	 * @param correo
-	 * @param clave
-	 * @return
-	 * @throws Exception
+	 * Devuelve un valor booleano que indica si el inicio de sesion fue exitoso.
 	 */
 	@WebMethod
-	public boolean login(String correo, String clave) throws Exception {
+	public boolean iniciarSesion(String correo, String clave) throws Exception {
 		try {
 			return sesion.validarCredenciales(correo, clave)!=null;
 		} catch (Exception e) {
@@ -34,21 +34,27 @@ public class ServiciosSOAP {
 		}
 	}
 	
-	//    Transferir dinero entre cuenta de la misma cooperativa
+	/**
+	 * Devuelve un valor booleano que indica si la transferencia de 
+	 * de la cuenta de origen a la cuenta de destino fue exitosa.
+	 */
 	@WebMethod
-	public boolean transferir(int co, int cd, double monto) throws Exception {
+	public boolean transferir(int numeroCuentaOrigen, int numeroCuentaDestino, double monto) throws Exception {
 		try {
-			cajero.transferir(cajero.buscarCuenta(co), cajero.buscarCuenta(cd), monto);
+			cajero.transferir(cajero.buscarCuenta(numeroCuentaOrigen), cajero.buscarCuenta(numeroCuentaDestino), monto);
 			return true;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
 	}
 	
-	//Realizar un deposito
-	public boolean depositar(int cuentaOrigen, double monto) throws Exception {
+	/**
+	 * Devuelve un valor booleano que indica si el deposito 
+	 * a la cuenta de destino fue exitosa.
+	 */
+	public boolean depositar(int numeroCuentaOrigen, double monto) throws Exception {
 		try {
-			cajero.depositar(cajero.buscarCuenta(cuentaOrigen), monto);
+			cajero.depositar(cajero.buscarCuenta(numeroCuentaOrigen), monto);
 			return true;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -57,10 +63,13 @@ public class ServiciosSOAP {
 	
 	
 	
-    //Realizar un retiro
-	public boolean retirar(int cuentaOrigen, double monto) throws Exception {
+	/**
+	 * Devuelve un valor booleano que indica si el retiro
+	 * de la cuenta destino fue exitosa.
+	 */
+	public boolean retirar(int numeroCuentaOrigen, double monto) throws Exception {
 		try {
-			cajero.retirar(cajero.buscarCuenta(cuentaOrigen), monto);
+			cajero.retirar(cajero.buscarCuenta(numeroCuentaOrigen), monto);
 			return true;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
