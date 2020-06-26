@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
@@ -25,17 +27,16 @@ public class ServiciosREST {
 	/**
 	 * Devuelve un valor booleano que indica si el inicio de sesion fue exitoso.
 	 */
-	@POST
-	@Path("loguear")
-	@Produces("text/plain")
-	public String iniciarSesion(String credenciales){
+	@GET
+	//@Path("loguear/{credenciales}/{otroparam}")
+	@Path("loguear/{credenciales}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String iniciarSesion(@PathParam("credenciales") String credenciales){
 		try {
-			if(sesion.validarCredenciales(credenciales.split(":")[0], credenciales.split(":")[1])!=null) {
-				return "correcto";
-			}
-			return "El usuario o contraseña son incorrectos";
+			sesion.validarCredenciales(credenciales.split(":")[0], credenciales.split(":")[1]).getClass();
+			return "correcto";
 		} catch (Exception e) {
-			return e.getMessage();
+			return "El usuario o contraseña son incorrectos: ("+e.getMessage()+").";
 		}
 	}
 }
