@@ -32,7 +32,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 	public ProcesoSesionON() {
 	}
 	/**
-	 * Notificación de estado de solicitud por correo electrónico
+	 * Notificación de estado de solicitud por correo electrónico.
 
 	 * 
 	 */
