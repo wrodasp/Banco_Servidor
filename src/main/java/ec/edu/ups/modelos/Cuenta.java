@@ -165,10 +165,9 @@ public class Cuenta implements Serializable {
 	}
 	
 	public void retirarDinero(double monto) throws Exception {
-		if (monto>saldo) {
-			throw new Exception("Error saldo insuficiente.");
+		if (monto > saldo) {
+			throw new Exception("Saldo insuficiente. Solo se puede retirar " + saldo + "$.");
 		}
-			
 		saldo -= monto;
 	}
 
@@ -177,7 +176,4 @@ public class Cuenta implements Serializable {
 		return "Cuenta [id=" + id + ", saldo=" + saldo + ", fechaApertura=" + fechaApertura + ", propietario="
 				+ propietario + "]";
 	}
-	
-	
-	
 }
