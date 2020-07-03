@@ -31,7 +31,11 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 	 **/
 	public ProcesoSesionON() {
 	}
-	
+	/**
+	 * Notificación de estado de solicitud por correo electrónico.
+
+	 * 
+	 */
 	@Override
 	public Usuario validarCredenciales(String correo, String clave) throws Exception {
 		try {
