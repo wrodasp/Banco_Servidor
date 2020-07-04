@@ -52,6 +52,7 @@ public class ServiciosSOAP {
 	 * Devuelve un valor booleano que indica si el deposito 
 	 * a la cuenta de destino fue exitosa.
 	 */
+	@WebMethod
 	public boolean depositar(int numeroCuentaOrigen, double monto) throws Exception {
 		try {
 			cajero.depositar(cajero.buscarCuenta(numeroCuentaOrigen), monto);
@@ -67,6 +68,7 @@ public class ServiciosSOAP {
 	 * Devuelve un valor booleano que indica si el retiro
 	 * de la cuenta destino fue exitosa.
 	 */
+	@WebMethod
 	public boolean retirar(int numeroCuentaOrigen, double monto) throws Exception {
 		try {
 			cajero.retirar(cajero.buscarCuenta(numeroCuentaOrigen), monto);

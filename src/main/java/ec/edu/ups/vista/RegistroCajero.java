@@ -15,29 +15,32 @@ import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 
 @ManagedBean
 @ViewScoped
-public class RegistroCajero 
-{
+public class RegistroCajero {
+	
 	@Inject
 	private ProcesoCajeroLocalON procesoCajero;
 	
 	private Cuenta cuenta;
 	
-	
 	private Transaccion transaccion;
 	
 	@PostConstruct
-	public void init()
-	{
+	public void init() {
 		cuenta = new Cuenta();
 		transaccion = new Transaccion();
-		Usuario userSesion = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		try {
-			if(userSesion.getRol()!=TipoUsuario.CAJERO) {
+			if(usuario.getRol() != TipoUsuario.CAJERO) {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 			}
 		} catch (Exception e) {
-			
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 
@@ -57,16 +60,12 @@ public class RegistroCajero
 		this.transaccion = transaccion;
 	}
 	
-	public String obtenerCuenta()
-	{
-		cuenta= procesoCajero.buscarCuenta(cuenta.getId());
-		System.out.println(cuenta);
-		return null;
+	public void obtenerCuenta() {
+		cuenta = procesoCajero.buscarCuenta(cuenta.getId());
 	}
 	
 	
-	public String realizaDeposito()
-	{
+	public String realizaDeposito() {
 		try {
 			procesoCajero.depositar(cuenta, transaccion.getMonto());
 		} catch (Exception e) {
@@ -76,8 +75,7 @@ public class RegistroCajero
 		return null;
 	}
 	
-	public String realizaRetiro()
-	{
+	public String realizaRetiro() {
 		try {
 			procesoCajero.retirar(cuenta, transaccion.getMonto());
 		} catch (Exception e) {

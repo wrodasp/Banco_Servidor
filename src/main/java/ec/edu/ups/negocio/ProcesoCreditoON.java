@@ -96,6 +96,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		try {
 			credito.setListaCuotas(generarAmortizacion(credito));
 			cuenta.getListaCreditos().add(credito);
+			cuenta.depositarDinero(credito.getMonto());
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -140,10 +141,8 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		}
 	}
 	
-	
 	@Override
 	public List<Credito> listarCreditos(Cuenta cuenta) {
 		return cuenta.getListaCreditos();	
-	}
-	
+	}	
 }

@@ -52,7 +52,7 @@ public class LoginUsuario {
 			} else if (usuario.getRol() == TipoUsuario.CAJERO) {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("crearCliente.xhtml?faces-redirect=true");
 			} else if (usuario.getRol() == TipoUsuario.JEFE_DE_CREDITO) {
-				// Por implementar
+				FacesContext.getCurrentInstance().getExternalContext().redirect("gestionCreditos.xhtml?faces-redirect=true");
 			} else {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("resumenCuenta.xhtml?faces-redirect=true");
 			}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
+<h:head>
+	<title>Mashi Bank</title>
+</h:head>
+<ui:composition template="plantillaJefeCredito.xhtml">
+	<body>
+		<ui:define name="formJefeCredito">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-content nopadding" style="color: black">
+						<h3 class="box-title" align="center">Lista de solicitudes</h3>
+						<div align="center">
+						<h:form>
+						<h:dataTable class="table"
+									 value="#{gestionCredito.solicitudes}" 
+									 var="solicitud">
+							<h:column>
+								<f:facet name="header">Nro</f:facet>
+								<label class="text-center">#{solicitud.id}</label>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Monto solicitado</f:facet>
+								<label class="text-center">#{solicitud.montoSolicitado}</label>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Fecha</f:facet>
+								<label class="text-center">#{solicitud.fecha}</label>
+							</h:column>
+							<h:column>
+								<h:commandButton class="btn btn-primary"
+												 actionListener="#{gestionCredito.revisarSolicitud(solicitud)}" 
+								                 value="Revisar"/>
+							</h:column>
+						</h:dataTable>
+						</h:form>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>			
+		</ui:define>
+	</body>
+</ui:composition>
+</html>

@@ -28,10 +28,6 @@ import ec.edu.ups.utilidades.UtilidadCorreo;
  */
 @Stateless
 public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionLocalON, Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4720176647181620435L;
 
 	@Inject
 	private CuentaDAO cuentaDAO;
@@ -54,7 +50,7 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 					     "con la clave: " + usuario.getClave() + " para ingresar " +
 			             "a tu cuenta de usuario en el sitio web www.mashibank.com.\n\n" +
 					     "Agredecemos tu afiliación a nosotros.";
-				UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta de usuario", mensaje);
+				//UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta de usuario", mensaje);
 			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -140,8 +136,7 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	
 
 	@Override
-	public List<RegistroSesion> listarSesiones()
-	{
+	public List<RegistroSesion> listarSesiones() {
 		List<RegistroSesion> listaSesiones = new ArrayList<>();
 		listarUsuarios().forEach(usuario ->{
 			usuario.getListaRegistroSesiones().forEach(registroSesion ->
@@ -149,7 +144,4 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 		});
 		return listaSesiones;
 	}
-	
-	
-	
 }
