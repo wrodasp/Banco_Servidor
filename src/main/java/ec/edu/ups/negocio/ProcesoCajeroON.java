@@ -62,6 +62,9 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 		}
 	}
 
+	/**
+	 * Lógica para débitos
+	 */
 	@Override
 	public void retirar(Cuenta cuenta, double monto) throws Exception {
 		try {
