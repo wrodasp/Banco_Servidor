@@ -46,6 +46,11 @@ public interface ProcesoCreditoLocalON {
 	 * Paga o abona la cuota con el monto especificado.
 	 **/
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception;
+	
+	/**
+	 * Debita la cuota vencida de forma automatica si esta esta vencida.
+	 **/
+	public void debitarCuotaVencida(Cuenta cuenta, Credito credito, Cuota cuota) throws Exception;
 
 	/**
 	 * Muestra el total de creditos de una persona

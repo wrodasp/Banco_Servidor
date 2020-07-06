@@ -11,10 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
+import ec.edu.ups.modelos.Cuota;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
+import ec.edu.ups.modelos.enums.EstadoCuota;
 import ec.edu.ups.modelos.enums.TipoTransaccion;
+import ec.edu.ups.negocio.ProcesoCreditoLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
 @ManagedBean
@@ -24,11 +28,15 @@ public class ResumenCuenta {
 	@Inject
 	private ProcesoGestionLocalON procesoGestion;
 	
+	@Inject
+	private ProcesoCreditoLocalON procesoCredito;
+	
 	private Cuenta cuenta;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 	private TipoTransaccion tipoMovimiento;
 	private List<Transaccion> movimientosRealizados;
+	private List<Credito> creditos;
 	
 	public ResumenCuenta() {
 	}
@@ -42,9 +50,11 @@ public class ResumenCuenta {
 		               .filter(c -> c.getPropietario().getCedula().equals(usuario.getPropietario().getCedula()))
 		               .findFirst().get();	   
 			movimientosRealizados = cuenta.getListaTransacciones();
+			creditos = cuenta.getListaCreditos();
 			fechaFin = LocalDate.now();
 			fechaInicio = getFechaFin().minusDays(30);
 			tipoMovimiento = TipoTransaccion.DEPOSITO;
+			debitarPagoAtrasados();
 		} catch (Exception e) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -53,6 +63,21 @@ public class ResumenCuenta {
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	public void debitarPagoAtrasados() {
+		LocalDate fechaActual = LocalDate.now();
+		creditos.forEach(credito -> {
+			Cuota cuota = credito.getListaCuotas()
+								 .stream()
+					             .filter(aux -> aux.getFechaVencimiento().isAfter(fechaActual))
+					             .findFirst().get();
+			try {
+				procesoCredito.debitarCuotaVencida(cuenta, credito, cuota);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	public Cuenta getCuenta() {

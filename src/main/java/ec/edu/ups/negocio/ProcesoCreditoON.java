@@ -20,6 +20,7 @@ import ec.edu.ups.modelos.Persona;
 import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
+import ec.edu.ups.modelos.enums.EstadoCuota;
 
 /**
  * Esta clase funciona como fachada para 
@@ -135,6 +136,23 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 				aux -> aux.getId() == credito.getId()? credito : aux
 			).collect(Collectors.toList());
 			cuenta.setListaCreditos(listaCreditosActualizada);
+			cuentaDAO.modificar(cuenta);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public void debitarCuotaVencida(Cuenta cuenta, Credito credito, Cuota cuota) throws Exception {
+		try {
+			LocalDate fechaActual = LocalDate.now();
+			double montoAPagar = cuota.getMonto() - cuota.getSaldo();
+			cuota.abonar(montoAPagar);
+			cuota.setEstado(EstadoCuota.VENCIDA);
+			List<Cuota> listaActualizada = credito.getListaCuotas()
+				                              	  .stream()
+				                              	  .map(aux -> aux.getId() == cuota.getId()? cuota : aux)
+				                              	  .collect(Collectors.toList());
+			credito.setListaCuotas(listaActualizada);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

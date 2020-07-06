@@ -114,19 +114,15 @@ public class Cuota implements Serializable {
 	 * Establece el valor del estado (PENDIENTE, PAGADA, VENCIDA).
 	 */
 	public void setEstado(EstadoCuota estado) {
-		if (this.fechaVencimiento.isAfter(LocalDate.now()) && saldo < monto) {
-			this.estado = EstadoCuota.VENCIDA;
-		} else {
-			this.estado = estado;
-		}
+		this.estado = estado;
 	}
 	
 	/**
 	 * Abona el monto especificado a la cuota.
 	 */
 	public void abonar(double monto) {
-		saldo += monto;
-		if(saldo == monto) {
+	    saldo += monto;	
+		if (monto == saldo) {
 			estado = EstadoCuota.PAGADA;
 		}
 	}

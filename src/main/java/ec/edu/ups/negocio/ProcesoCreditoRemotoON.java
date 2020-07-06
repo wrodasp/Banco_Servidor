@@ -48,6 +48,11 @@ public interface ProcesoCreditoRemotoON {
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception;
 	
 	/**
+	 * Debita la cuota vencida de forma automatica si esta esta vencida.
+	 **/
+	public void debitarCuotaVencida(Cuenta cuenta, Credito credito, Cuota cuota) throws Exception;
+	
+	/**
 	 * Muestra el total de creditos de una persona
 	 */
 	public List<Credito> listarCreditos(Cuenta cuenta);
