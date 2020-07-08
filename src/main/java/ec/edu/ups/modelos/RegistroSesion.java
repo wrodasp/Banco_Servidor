@@ -24,7 +24,8 @@ public class RegistroSesion implements Serializable {
 	@Column(nullable = false)
 	private int id;
 	
-	@Column(nullable = false, columnDefinition = "TINYINT", length = 1)
+	//@Column(nullable = false, columnDefinition = "TINYINT", length = 1)
+	@Column(nullable = false)
 	private boolean exitoso;
 	
 	@Column(nullable = false)

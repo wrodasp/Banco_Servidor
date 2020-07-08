@@ -27,7 +27,7 @@ public class ResumenCreditos {
 
 	@PostConstruct
 	public void init() {
-		/*Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		try {
 			cuenta = procesoGestion.listarCuentas()
 		               .stream()
@@ -41,23 +41,9 @@ public class ResumenCreditos {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
-		}*/
-		
-		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		try {
-			if(usuario.getRol() != TipoUsuario.CLIENTE) {
-				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
-			}
-		} catch (Exception e) {
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
 		}
 		
+
 	}
 	
 	public DateTimeFormatter getFormatoFecha() {
@@ -82,4 +68,7 @@ public class ResumenCreditos {
 		}
 		return "EN MORA";
 	}
+	
+
+	
 }

@@ -59,6 +59,7 @@ public class ResumenCuenta {
 		} catch (Exception e) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				System.out.println("**"+e.toString());
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 			} catch (Exception e2) {
 				e2.printStackTrace();
