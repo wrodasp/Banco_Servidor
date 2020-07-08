@@ -44,6 +44,7 @@ public class ResumenCuenta {
 	@PostConstruct
 	public void init() {
 		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		System.out.println("USUARIO:  "+usuario);
 		try {
 			cuenta = procesoGestion.listarCuentas()
 		               .stream()

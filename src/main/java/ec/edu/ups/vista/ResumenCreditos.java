@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Usuario;
+import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
 @ManagedBean
@@ -26,12 +27,28 @@ public class ResumenCreditos {
 
 	@PostConstruct
 	public void init() {
-		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		/*Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		try {
 			cuenta = procesoGestion.listarCuentas()
 		               .stream()
 		               .filter(c -> c.getPropietario().getCedula().equals(usuario.getPropietario().getCedula()))
 		               .findFirst().get();
+		} catch (Exception e) {
+	
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}*/
+		
+		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		try {
+			if(usuario.getRol() != TipoUsuario.CLIENTE) {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			}
 		} catch (Exception e) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -40,6 +57,7 @@ public class ResumenCreditos {
 				e2.printStackTrace();
 			}
 		}
+		
 	}
 	
 	public DateTimeFormatter getFormatoFecha() {
