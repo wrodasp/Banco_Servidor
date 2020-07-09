@@ -3,9 +3,6 @@ package ec.edu.ups.servicios;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.sound.midi.Soundbank;
-
-import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
@@ -28,7 +25,7 @@ public class ServiciosSOAP {
 	@WebMethod
 	public boolean iniciarSesion(String correo, String clave) throws Exception {
 		try {
-			return sesion.validarCredenciales(correo, clave)!=null;
+			return sesion.validarCredenciales(correo, clave) != null;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

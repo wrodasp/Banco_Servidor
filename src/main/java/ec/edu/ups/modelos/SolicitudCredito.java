@@ -34,7 +34,7 @@ public class SolicitudCredito implements Serializable {
 	@Column(nullable = false)
 	private int id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 5000)
 	private String texto;
 	
 	@Column(nullable = false, precision = 2)
@@ -143,19 +143,5 @@ public class SolicitudCredito implements Serializable {
 	 */
 	public void setArchivosAdjuntos(List<File> archivosAdjuntos) {
 		this.archivosAdjuntos = archivosAdjuntos;
-	}
-	
-	/**
-	 * Adjunta el archivo especificado a la solicitud.
-	 */
-	public void adjuntarArchivo(File archivo) {
-		archivosAdjuntos.add(archivo);
-	}
-	
-	/**
-	 * Remueve el archivo especificado de la solicitud.
-	 */
-	public void eliminarArchivo(File archivo) {
-		archivosAdjuntos.remove(archivo);
 	}
 }

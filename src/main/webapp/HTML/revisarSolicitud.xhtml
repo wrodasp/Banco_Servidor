@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Mashi Bank</title>
 </h:head>
@@ -17,7 +18,7 @@
 						<div class="widget-content nopadding" style="color: black">
 						<h3 class="box-title" align="center">Solicitud</h3>
 							<div align="center">
-						<h:form>
+						<h:form id="formulario">
 							<h:messages class="alert text-center"/>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Nro. Cuenta: #{revisionCredito.cuenta.id}"/><br/>
@@ -31,17 +32,29 @@
 										       value="#{revisionCredito.solicitud.texto}"/><br/>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Archivos adjuntos:"/><br/>
-							
+							<label class="text-left" style="margin-left: 5%">
+								Fecha Vencimiento: <p:datePicker id="desde" value="#{revisionCredito.fechaVencimiento}"/>
+							</label>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Estado:"/>
-							<h:selectOneMenu>
+							<h:selectOneMenu value="#{revisionCredito.estado}">
 								<f:selectItems class="text-left" style="margin-left:5%;"
-											   value="#{revisionCredito.estadoSolicitud}"
+											   value="#{revisionCredito.estadosSolicitud}"
 											   var="estado" itemValue="#{estado}" itemLabel="#{estado.etiqueta}" />
 							</h:selectOneMenu><br/>
+							<h:outputLabel class="text-left" style="margin-left:5%;"
+										   value="Tipo Credito:"/>
+							<h:selectOneMenu value="#{revisionCredito.tipoCredito}">
+								<f:selectItems class="text-left" style="margin-left:5%;"
+											   value="#{revisionCredito.tiposCredito}"
+											   var="tipo" itemValue="#{tipo}" itemLabel="#{tipo.etiqueta}" />
+							</h:selectOneMenu><br/>
+							<h:outputLabel class="text-left" style="margin-left:5%;"
+										   value="Observaciones:"/><br/>
+							<h:inputTextarea style="margin-left:5%; width:90%;" value="#{revisionCredito.observaciones}"/><br/>
 							<h:commandButton class="btn btn-primary"
-											 actionListener="#{revisionCredito.cambiarEstadoSolicitud()}" 
-							                 value="Guardar" />
+											 action="#{revisionCredito.cambiarEstadoSolicitud()}" 
+							                 value="Guardar" update="formulario"/>
 						</h:form>
 						</div>
 						</div>

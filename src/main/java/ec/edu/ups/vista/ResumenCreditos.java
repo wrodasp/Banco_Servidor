@@ -34,7 +34,6 @@ public class ResumenCreditos {
 		               .filter(c -> c.getPropietario().getCedula().equals(usuario.getPropietario().getCedula()))
 		               .findFirst().get();
 		} catch (Exception e) {
-	
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
@@ -42,8 +41,6 @@ public class ResumenCreditos {
 				e2.printStackTrace();
 			}
 		}
-		
-
 	}
 	
 	public DateTimeFormatter getFormatoFecha() {
@@ -69,6 +66,21 @@ public class ResumenCreditos {
 		return "EN MORA";
 	}
 	
-
+	public void solicitarCredito() {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cuenta", cuenta);
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("solicitudCredito.xhtml?faces-redirect=true");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public void verCuotas(Credito credito) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("credito", credito);
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("resumenCuotas.xhtml?faces-redirect=true");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

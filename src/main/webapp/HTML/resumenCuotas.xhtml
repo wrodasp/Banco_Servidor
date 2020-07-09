@@ -13,27 +13,27 @@
 	<body>
 		<ui:define name="formCuenta">
 			<div class="container-fluid">
-				<h3 class="text-center" style="margin-top: 3%">Cuenta de Ahorro</h3>
+				<h3 class="text-center" style="margin-top: 3%">Información de crédito</h3>
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="widget-box">
 							<div class="widget-content nopadding" style="color: black">
 								<div align="center" style="margin-top: 2%">
-									<h:outputLabel value="Nro. Cuenta: #{resumenCuenta.cuenta.id}"
+									<h:outputLabel value="Monto: #{resumenCuotas.credito.monto}"
 										class="text-left" style="margin-left:5%;" />
-									<br />
+									<br/>
 									<h:outputLabel
-										value="Propietario: #{resumenCuenta.cuenta.propietario.toString()}"
+										value="Saldo: #{resumenCuotas.credito.saldo}"
 										class="text-left" style="margin-left:5%;" />
-									<br />
+									<br/>
 									<h:outputLabel
-										value="Fecha de apertura: #{resumenCuenta.cuenta.fechaApertura.format(resumenCuenta.formatoFecha)}"
+										value="Fecha de vencimiento: #{resumenCuotas.credito.fechaVencimiento.format(resumenCuenta.formatoFecha)}"
 										class="text-left" style="margin-left:5%;" />
-									<br />
+									<br/>
 									<h:outputLabel
-										value="Saldo actual: #{resumenCuenta.cuenta.saldo}"
+										value="Saldo actual: #{resumenCuotas.credito.tipo.etiqueta}"
 										class="text-left" style="margin-left:5%;" />
-									<br />
+									<br/>
 								</div>
 							</div>
 						</div>
@@ -45,38 +45,31 @@
 							<div class="widget-content nopadding" style="">
 								<h:form>
 									<h5 align="left"
-										style="margin-left: 5%; margin-top: 2%; margin-bottom: 1%;">Tus
-										creditos</h5><br/>
-									<h:commandButton class="btn btn-primary text-left"
-										             style="margin-left: 5%; margin-bottom: 1%;"
-									                 action="#{resumenCreditos.solicitarCredito()}" 
-									                 value="Solicitar credito" />
+										style="margin-left: 5%; margin-top: 2%; margin-bottom: 1%;">
+										Lista de cuotas
+									</h5>
 									<div
 										style="position: relative; height: 30%; overflow: auto; display: block; margin-left: 5%; margin-right: 5%; margin-bottom: 2%;">
-										<h:dataTable id="movimientos"
-											value="#{resumenCreditos.cuenta.listaCreditos}" var="credito"
+										<h:dataTable id="cuotas"
+											value="#{resumenCuotas.credito.listaCuotas}" var="cuota"
 											class="table">
 											<h:column class="span7">
-												<f:facet name="header">Tipo</f:facet>
-												<label class="text-center">#{credito.tipo}</label>
-											</h:column>
-											<h:column class="span7">
 												<f:facet name="header">Monto</f:facet>
-												<label class="text-center">#{credito.monto}</label>
+												<label class="text-center">#{cuota.monto}</label>
 											</h:column>
 											<h:column class="span7">
 												<f:facet name="header">Saldo</f:facet>
-												<label class="text-center">#{credito.saldo}</label>
+												<label class="text-center">#{cuota.saldo}</label>
 											</h:column>
 											<h:column class="span7">
-												<f:facet name="header">Fecha</f:facet>
-												<label class="text-center">#{credito.fechaVencimiento.format(resumenCreditos.formatoFecha)}</label>
+												<f:facet name="header">Fecha de Vencimiento</f:facet>
+												<label class="text-center">#{cuota.fechaVencimiento.format(resumenCuenta.formatoFecha)}</label>
 											</h:column>
 											<h:column class="span7">
-												<f:facet name="header">Amortización</f:facet>
-												<h:commandButton align="center"
-																 actionListener="#{resumenCreditos.verCuotas(credito)}" 
-																 value="Ver" />
+												<h:commandButton class="text-center"
+												 				 rendered="#{cuota.estado.ordinal() == 0}" 
+												                 action="#{resumenCuotas.verDetalleCuota()}" 
+												                 value="Pagar" />
 											</h:column>
 										</h:dataTable>
 									</div>

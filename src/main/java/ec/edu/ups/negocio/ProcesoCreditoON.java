@@ -21,6 +21,7 @@ import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.EstadoCuota;
+import ec.edu.ups.modelos.enums.EstadoSolicitud;
 
 /**
  * Esta clase funciona como fachada para 
@@ -43,14 +44,15 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	}
 	
 	@Override
-	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud) throws Exception {
+	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud, String extra) throws Exception {
 		try {
 			Persona propietario = cuenta.getPropietario();
 			solicitud.setTexto(
-				"Yo, " + propietario.getNombre() + " " + propietario.getApellido() + ", " +
+				"Yo, " + propietario.toString() + ", " +
 			    "portador de la cedula de identidad Nro " + propietario.getCedula() + ", " +
 				"solicito de la manera más comedida se me conceda el " +
-				"credito de " + solicitud.getMontoSolicitado()		
+				"credito de " + solicitud.getMontoSolicitado() + "$.\n\n" +
+				"Motivos:\n\n" + extra + "\n\n"
 			);
 			cuenta.getListaSolicitudes().add(solicitud);
 			cuentaDAO.modificar(cuenta);
@@ -75,15 +77,30 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	}
 
 	@Override
-	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud) throws Exception {
+	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud, String observaciones) throws Exception {
 		try {
 			Notificacion notificacion = new Notificacion();
-			notificacion.setMensaje(
-				"Banco Mashi le informa mediante este medio que " + 
-				"su solicitud de credito enviada el " + solicitud.getFecha().toString() + ", " +
-				"se encuentra en estado: " + solicitud.getEstado() + ".\n\n" +
-				"Solicitud enviada: \n\n" + solicitud.getTexto() + "\n\n"
-			);
+			if (solicitud.getEstado() == EstadoSolicitud.TRAMITANDO) {
+				notificacion.setMensaje(
+					"Banco Mashi le informa mediante este medio que " + 
+					"su solicitud de credito enviada el " + solicitud.getFecha().toString() + ", " +
+					"se encuentra en estado: " + solicitud.getEstado() + ".\n\n" +
+					"Solicitud enviada: \n\n" + solicitud.getTexto() + "\n\n"
+				);
+			} else if (solicitud.getEstado() == EstadoSolicitud.APROBADA) {
+				notificacion.setMensaje(
+					"Banco Mashi le informa mediante este medio que " + 
+					"su solicitud de credito enviada el " + solicitud.getFecha().toString() + ", " +
+					"se ha sido " + solicitud.getEstado() + ".\n\n"
+				);
+			} else {
+				notificacion.setMensaje(
+					"Banco Mashi le informa mediante este medio que " + 
+					"su solicitud de credito enviada el " + solicitud.getFecha().toString() + ", " +
+					"se encuentra en estado: " + solicitud.getEstado() + ".\n\n" +
+					"Observaciones: " + observaciones + "\n\n"
+				);
+			}
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
@@ -96,8 +113,8 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	public void registrarCredito(Cuenta cuenta, Credito credito) throws Exception {
 		try {
 			credito.setListaCuotas(generarAmortizacion(credito));
-			cuenta.getListaCreditos().add(credito);
 			cuenta.depositarDinero(credito.getMonto());
+			cuenta.getListaCreditos().add(credito);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -128,6 +145,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception {
 		try {
 			cuota.abonar(monto);
+			cuenta.retirarDinero(monto);
 			List<Cuota> listaCuotasActualizada = credito.getListaCuotas().stream().map(
 				aux -> aux.getId() == cuota.getId()? cuota : aux
 			).collect(Collectors.toList());

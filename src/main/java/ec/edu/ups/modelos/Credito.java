@@ -94,15 +94,6 @@ public class Credito implements Serializable {
 	}
 	
 	/**
-	 * Devuelve el monto pagado
-	 *
-	 */
-	public double getMPagado() {
-		return monto-saldo;
-	}
-	
-	
-	/**
 	 * Establece el valor del saldo.
 	 */
 	public void setSaldo(double saldo) {

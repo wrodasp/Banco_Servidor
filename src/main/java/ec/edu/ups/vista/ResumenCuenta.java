@@ -44,7 +44,6 @@ public class ResumenCuenta {
 	@PostConstruct
 	public void init() {
 		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		System.out.println("USUARIO:  "+usuario);
 		try {
 			cuenta = procesoGestion.listarCuentas()
 		               .stream()
@@ -59,7 +58,6 @@ public class ResumenCuenta {
 		} catch (Exception e) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-				System.out.println("**"+e.toString());
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 			} catch (Exception e2) {
 				e2.printStackTrace();
@@ -70,15 +68,15 @@ public class ResumenCuenta {
 	public void debitarPagoAtrasados() {
 		LocalDate fechaActual = LocalDate.now();
 		creditos.forEach(credito -> {
-			Cuota cuota = credito.getListaCuotas()
-								 .stream()
-					             .filter(aux -> aux.getFechaVencimiento().isAfter(fechaActual))
-					             .findFirst().get();
-			try {
-				procesoCredito.debitarCuotaVencida(cuenta, credito, cuota);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			credito.getListaCuotas().forEach(cuota -> {
+				if (fechaActual.isAfter(cuota.getFechaVencimiento())) {
+					try {
+						procesoCredito.debitarCuotaVencida(cuenta, credito, cuota);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		});
 	}
 	
@@ -90,7 +88,7 @@ public class ResumenCuenta {
 		if (cuenta.getListaTransacciones().size() > 0) {
 			return cuenta.getListaTransacciones()
 					 	 .stream()
-             		 	 .sorted((t1,t2) -> t1.getFecha().compareTo(t2.getFecha()))
+             		 	 .sorted((t1,t2) -> t2.getFecha().compareTo(t1.getFecha()))
              		 	 .findFirst().get().getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		}
 		return "Sin transacciones";

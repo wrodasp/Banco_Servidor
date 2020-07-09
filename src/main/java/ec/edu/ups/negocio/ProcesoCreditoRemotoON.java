@@ -20,7 +20,7 @@ public interface ProcesoCreditoRemotoON {
 	/**
 	 * Registra la solicitud del usuario
 	 **/
-	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud) throws Exception;
+	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud, String extra) throws Exception;
 	
 	/**
 	 * Cambia el estado de la solicitud especificada a APROBADA o RECHAZADA.
@@ -30,7 +30,7 @@ public interface ProcesoCreditoRemotoON {
 	/**
 	 * Envia una notificación al usuario sobre la solicitud especificada.
 	 **/
-	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud) throws Exception;
+	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud, String observaciones) throws Exception;
 	
 	/**
 	 * Resgitra el credito en la cuenta especificada.

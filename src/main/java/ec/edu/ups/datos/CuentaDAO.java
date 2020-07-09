@@ -29,6 +29,7 @@ public class CuentaDAO {
 	 **/
 	public void agregar(Cuenta cuenta) {
 		manager.persist(cuenta);
+		manager.flush();
 	}
 	
 	/**
