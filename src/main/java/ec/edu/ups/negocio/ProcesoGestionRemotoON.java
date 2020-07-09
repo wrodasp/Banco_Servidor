@@ -51,6 +51,13 @@ public interface ProcesoGestionRemotoON {
 	public List<Credito> listarCreditos();
 	
 	/**
+	 * Decuelve los créditos de una cuenta específica
+	 * @param cue_id
+	 * @return
+	 */
+	public List<Credito> listarCreditosCuenta(int cue_id);
+	
+	/**
 	 * Devuelve la lista de movimientos realizada dentro del rango de fechas especificado.
 	 **/
 	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin);

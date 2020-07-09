@@ -99,6 +99,13 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	}
 	
 	@Override
+	public List<Credito> listarCreditosCuenta(int cue_id) {
+		Cuenta cuenta = cuentaDAO.buscar(cue_id);
+		cuenta.toString();
+		return cuenta.getListaCreditos();
+	}
+	
+	@Override
 	public List<Transaccion> listarMovimientos(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin) {
 		return cuenta.getListaTransacciones().stream().filter(aux -> 
 			aux.getFecha().isAfter(fechaInicio.minusDays(1)) &&

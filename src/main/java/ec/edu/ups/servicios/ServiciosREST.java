@@ -1,25 +1,37 @@
 package ec.edu.ups.servicios;
 
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 
+import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
+import ec.edu.ups.negocio.ProcesoGestionLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
-@ApplicationPath(value = "rest")
-@Path(value = "/servicios")
-public class ServiciosREST extends Application {
+@Path("/cliente")
+public class ServiciosREST{
 
 	@Inject
 	private ProcesoSesionLocalON sesion;
 		
 	@Inject
 	private ProcesoCajeroLocalON cajero;
+	
+	@Inject
+	private ProcesoGestionLocalON cliente;
+	
+	@GET
+	@Path(value = "/getCreditos")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Credito> getCreditos(@QueryParam("cue_id") int cue_id) {
+		return cliente.listarCreditosCuenta(cue_id);
+	}
 		
 	/**
 	 * Devuelve un valor booleano que indica si el inicio de sesion fue exitoso.
