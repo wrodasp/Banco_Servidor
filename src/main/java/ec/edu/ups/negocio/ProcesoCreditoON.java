@@ -121,6 +121,9 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		}
 	}
 
+	/**
+	 * Lógica y obtención de la información
+	 */
 	@Override
 	public List<Cuota> generarAmortizacion(Credito credito) throws Exception {
 		try {
