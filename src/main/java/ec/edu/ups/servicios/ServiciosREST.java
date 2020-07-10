@@ -27,24 +27,28 @@ public class ServiciosREST{
 	private ProcesoGestionLocalON cliente;
 	
 	@GET
-	@Path(value = "/getCreditos")
+	@Path("/getCreditos")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Credito> getCreditos(@QueryParam("cue_id") int cue_id) {
-		return cliente.listarCreditosCuenta(cue_id);
+	public List<Credito> getCreditos(@QueryParam("cue_id") int cue_id) throws Exception {
+		try {
+			return cliente.listarCreditosCuenta(cue_id);
+		} catch (Exception e) {
+			throw new Exception("Se ah producido un error"+e.getMessage());
+		}
 	}
 		
 	/**
 	 * Devuelve un valor booleano que indica si el inicio de sesion fue exitoso.
 	 */
 	@GET
-	@Path(value = "/iniciarSesion")
-	@Produces(value = "application/json")
-	public boolean iniciarSesion(@QueryParam(value = "correo") String correo,
-			                     @QueryParam(value = "clave") String clave) throws Exception {
+	@Path("/loguear")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String iniciarSesion(@QueryParam("user") String user,
+			                     @QueryParam("clave") String clave) throws Exception {
 		try {
-			return sesion.validarCredenciales(correo, clave) != null;
+			return sesion.validarCredenciales(user, clave) != null ? "exitoso" : "fallido";
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			return "fallido";
 		}
 	}
 	
