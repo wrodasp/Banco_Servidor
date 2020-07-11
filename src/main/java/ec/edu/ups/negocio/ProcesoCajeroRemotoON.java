@@ -33,6 +33,13 @@ public interface ProcesoCajeroRemotoON {
 	public void retirar(Cuenta cuenta, double monto) throws Exception;
 	
 	/**
+	 * Método para buscar una cuenta según la cédula (APP MOVIL).
+	 * @param cedula
+	 * @return
+	 */
+	public int buscarCuentaCedula(String cedula);
+	
+	/**
 	 * Realiza la transferencia del monto especifica desde la cuenta origen a la cuenta destino.
 	 **/
 	public void transferir(Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto) throws Exception;

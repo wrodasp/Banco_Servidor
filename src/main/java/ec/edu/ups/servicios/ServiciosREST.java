@@ -1,15 +1,18 @@
 package ec.edu.ups.servicios;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import ec.edu.ups.modelos.Credito;
+import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
@@ -46,7 +49,8 @@ public class ServiciosREST{
 	public String iniciarSesion(@QueryParam("user") String user,
 			                     @QueryParam("clave") String clave) throws Exception {
 		try {
-			return sesion.validarCredenciales(user, clave) != null ? "exitoso" : "fallido";
+			Usuario usuario = sesion.validarCredenciales(user, clave);			
+			return user != null ? "exitoso"+ cajero.buscarCuentaCedula(usuario.getPropietario().getCedula()) : "fallido";
 		} catch (Exception e) {
 			return "fallido";
 		}

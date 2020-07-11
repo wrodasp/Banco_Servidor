@@ -60,6 +60,16 @@ public class CuentaDAO {
 	}
 	
 	/**
+	 * Busca la cuenta asociada al ID especificado en la base de datos según la cédula (APP MÓVIL).
+	 **/
+	public int buscarCedula(String cedula) {
+		Cuenta cuenta = manager.createQuery(
+				"SELECT c FROM Cuenta c WHERE c.propietario = '"+cedula+"'", Cuenta.class)
+				.getSingleResult();
+		return cuenta.getId();
+	}
+	
+	/**
 	 * Devuelve un lista de cuentas de la base de datos.
 	 **/
 	public List<Cuenta> listar() {

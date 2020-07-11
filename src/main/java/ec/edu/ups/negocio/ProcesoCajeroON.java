@@ -49,6 +49,11 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 	}
 	
 	@Override
+	public int buscarCuentaCedula(String cedula) {
+		return cuentaDAO.buscarCedula(cedula);
+	}
+	
+	@Override
 	public void depositar(Cuenta cuenta, double monto) throws Exception {
 		try {
 			Transaccion transaccion = new Transaccion();
