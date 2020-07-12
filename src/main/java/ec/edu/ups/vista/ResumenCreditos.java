@@ -75,6 +75,9 @@ public class ResumenCreditos {
 		}
 	}
 	
+	/**
+	*
+	*/
 	public void verCuotas(Credito credito) {
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("credito", credito);
 		try {
