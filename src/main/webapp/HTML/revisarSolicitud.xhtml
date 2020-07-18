@@ -17,7 +17,7 @@
 					<div class="widget-box">
 						<div class="widget-content nopadding" style="color: black">
 						<h3 class="box-title" align="center">Solicitud</h3>
-							<div align="center">
+						<div align="left">
 						<h:form id="formulario">
 							<h:messages class="alert text-center"/>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
@@ -32,19 +32,34 @@
 										       value="#{revisionCredito.solicitud.texto}"/><br/>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Archivos adjuntos:"/><br/>
+							<h:dataTable style="margin-left:5%; margin-bottom:5%"
+										 value="#{revisionCredito.archivosAdjuntos}"
+										 var="archivo">
+								<h:column>
+									<f:facet name="header">Nombre</f:facet>
+									#{archivo.name}
+								</h:column>
+								<h:column>
+									<p:commandButton class="btn" value="Descargar" ajax="false" 
+									                 onclick="PrimeFaces.monitorDownload(start, stop);">
+        								<p:fileDownload value="#{archivo}" />
+    								</p:commandButton> 
+								</h:column>
+							</h:dataTable>
+							
 							<label class="text-left" style="margin-left: 5%">
 								Fecha Vencimiento: <p:datePicker id="desde" value="#{revisionCredito.fechaVencimiento}"/>
 							</label>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Estado:"/>
-							<h:selectOneMenu value="#{revisionCredito.estado}">
+							<h:selectOneMenu style="margin-left:5%;" value="#{revisionCredito.estado}">
 								<f:selectItems class="text-left" style="margin-left:5%;"
 											   value="#{revisionCredito.estadosSolicitud}"
 											   var="estado" itemValue="#{estado}" itemLabel="#{estado.etiqueta}" />
 							</h:selectOneMenu><br/>
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Tipo Credito:"/>
-							<h:selectOneMenu value="#{revisionCredito.tipoCredito}">
+							<h:selectOneMenu style="margin-left:5%;" value="#{revisionCredito.tipoCredito}">
 								<f:selectItems class="text-left" style="margin-left:5%;"
 											   value="#{revisionCredito.tiposCredito}"
 											   var="tipo" itemValue="#{tipo}" itemLabel="#{tipo.etiqueta}" />
@@ -52,9 +67,11 @@
 							<h:outputLabel class="text-left" style="margin-left:5%;"
 										   value="Observaciones:"/><br/>
 							<h:inputTextarea style="margin-left:5%; width:90%;" value="#{revisionCredito.observaciones}"/><br/>
-							<h:commandButton class="btn btn-primary"
+							<div align="center">
+								<h:commandButton class="btn btn-primary" style="margin-bottom:2%;"
 											 action="#{revisionCredito.cambiarEstadoSolicitud()}" 
 							                 value="Guardar" update="formulario"/>
+							</div>
 						</h:form>
 						</div>
 						</div>

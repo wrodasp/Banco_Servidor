@@ -1,9 +1,7 @@
 package ec.edu.ups.modelos;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ec.edu.ups.modelos.enums.TipoCredito;
-
 
 /**
  * Esta clase permite guardar datos 
@@ -44,7 +41,6 @@ public class Credito implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
 	private TipoCredito tipo;
-	
 	
 	@Column(nullable = false)
 	private LocalDate fechaVencimiento;

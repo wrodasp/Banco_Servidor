@@ -68,7 +68,7 @@
 											<h:column class="span7">
 												<h:commandButton class="text-center"
 												 				 rendered="#{cuota.estado.ordinal() == 0}" 
-												                 action="#{resumenCuotas.verDetalleCuota()}" 
+												                 action="#{resumenCuotas.verDetalleCuota(cuota)}" 
 												                 value="Pagar" />
 											</h:column>
 										</h:dataTable>

@@ -3,13 +3,17 @@ package ec.edu.ups.modelos;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ec.edu.ups.modelos.enums.EstadoCuota;
@@ -122,7 +126,7 @@ public class Cuota implements Serializable {
 	 */
 	public void abonar(double monto) {
 	    saldo += monto;	
-		if (monto == saldo) {
+		if (this.monto == saldo) {
 			estado = EstadoCuota.PAGADA;
 		}
 	}

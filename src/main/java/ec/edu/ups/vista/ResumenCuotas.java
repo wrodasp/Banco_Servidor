@@ -1,13 +1,12 @@
 package ec.edu.ups.vista;
 
-import java.time.format.DateTimeFormatter;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import ec.edu.ups.modelos.Credito;
+import ec.edu.ups.modelos.Cuota;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.EstadoCuota;
 
@@ -42,7 +41,8 @@ public class ResumenCuotas {
 		return EstadoCuota.values();
 	}
 	
-	public String verDetalleCuota() {
-		return "detalleCuota.xhtml?faces-redirect=true";
+	public String verDetalleCuota(Cuota cuota) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cuota", cuota);
+		return "resumenPago.xhtml?faces-redirect=true";
 	}
 }

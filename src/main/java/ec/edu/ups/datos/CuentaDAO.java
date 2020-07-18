@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
 
 /**
@@ -29,13 +30,24 @@ public class CuentaDAO {
 	 **/
 	public void agregar(Cuenta cuenta) {
 		manager.persist(cuenta);
-		manager.flush();
 	}
 	
 	/**
 	 * Actualiza la cuenta especificada en la base de datos.
 	 **/
 	public void modificar(Cuenta cuenta) {
+		cuenta.getListaCreditos().forEach(credito -> {
+			Credito aux = manager.find(Credito.class, credito.getId());
+			if (aux != null) {
+				System.out.println("Existe el credito");
+				credito.getListaCuotas().forEach(cuota -> {
+					manager.merge(cuota);
+				});
+				manager.merge(credito);
+			} else {
+				manager.persist(credito);
+			}
+		});
 		manager.merge(cuenta);
 	}
 	
@@ -64,7 +76,7 @@ public class CuentaDAO {
 	 **/
 	public int buscarCedula(String cedula) {
 		Cuenta cuenta = manager.createQuery(
-				"SELECT c FROM Cuenta c WHERE c.propietario = '"+cedula+"'", Cuenta.class)
+				"SELECT c FROM Cuenta c WHERE c.propietario = '" + cedula + "'", Cuenta.class)
 				.getSingleResult();
 		return cuenta.getId();
 	}

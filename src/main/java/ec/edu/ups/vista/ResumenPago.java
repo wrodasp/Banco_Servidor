@@ -62,7 +62,11 @@ public class ResumenPago {
 	
 	public void guardarPago() {
 		try {
-			procesoCredito.pagarCuota(cuenta, credito, cuota, monto);
+			if ((cuota.getSaldo() + monto) > cuota.getMonto()) {
+				procesoCredito.pagarCuota(cuenta, credito, cuota, cuota.getMonto() - cuota.getSaldo());
+			} else {
+				procesoCredito.pagarCuota(cuenta, credito, cuota, monto);
+			}
 			FacesContext.getCurrentInstance().getExternalContext().redirect("resumenCuotas.xhtml?faces-redirect=true");
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, 

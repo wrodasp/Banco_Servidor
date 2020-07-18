@@ -91,7 +91,8 @@ public class FormularioSolicitud {
 		}
 		for (int i = 0; i < adjuntos.getFiles().size(); i++) {
 			try {
-				String nombreArchivo = cuenta.getId() + "_" + i;
+				//String nombreArchivo = "/home/wilson/ArchivosAdjuntos/" + cuenta.getId() + "_" + i;
+				String nombreArchivo = "Archivo-" + cuenta.getId() + "_" + i;
 				File archivo = new File(nombreArchivo);
 				OutputStream streamSalida = new FileOutputStream(archivo);
 				streamSalida.write(adjuntos.getFiles().get(i).getContent());
@@ -106,6 +107,9 @@ public class FormularioSolicitud {
 		try {
 			procesoCredito.solicitarCredito(cuenta, solicitud, motivos);
 			procesoCredito.notificarSobreSolicitud(usuario, solicitud, "");
+			FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Solicitud enviada.", "")
+			);
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, 
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "No se ha podido enviar la solicitud.", "")

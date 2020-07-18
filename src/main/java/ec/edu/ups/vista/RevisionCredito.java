@@ -1,5 +1,8 @@
 package ec.edu.ups.vista;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.modelos.Cuenta;
@@ -34,6 +40,7 @@ public class RevisionCredito {
 	private SolicitudCredito solicitud;
 	private EstadoSolicitud estado;
 	private TipoCredito tipoCredito;
+	private StreamedContent[] archivosAdjuntos;
 	private LocalDate fechaVencimiento;
 	private String observaciones;
 	
@@ -45,10 +52,19 @@ public class RevisionCredito {
 		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		cuenta = (Cuenta) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("cuentaOrigen");
 		solicitud = (SolicitudCredito) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("solicitudRevision");
+		archivosAdjuntos = new StreamedContent[solicitud.getArchivosAdjuntos().size()];
 		try {
 			if(usuario.getRol() != TipoUsuario.JEFE_DE_CREDITO) {
 				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			}
+			for (int i = 0; i < solicitud.getArchivosAdjuntos().size(); i++) {
+				File aux = solicitud.getArchivosAdjuntos().get(i);
+				InputStream stream = new FileInputStream(aux);
+				archivosAdjuntos[i] = DefaultStreamedContent.builder()
+															.name(aux.getName())
+															.stream(() -> stream)
+															.build();
 			}
 		} catch (Exception e) {
 			try {
@@ -85,6 +101,14 @@ public class RevisionCredito {
 	
 	public void setEstado(EstadoSolicitud estado) {
 		this.estado = estado;
+	}
+	
+	public StreamedContent[] getArchivosAdjuntos() {
+		return archivosAdjuntos;
+	}
+	
+	public void setArchivosAdjuntos(StreamedContent[] archivosAdjuntos) {
+		this.archivosAdjuntos = archivosAdjuntos;
 	}
 	
 	public TipoCredito getTipoCredito() {

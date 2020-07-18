@@ -49,7 +49,7 @@ public class Cuenta implements Serializable {
 	private List<SolicitudCredito> listaSolicitudes;
 	
 	@JoinColumn(name = "cuenta_id")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<Credito> listaCreditos;
 	
 	/**

@@ -49,6 +49,7 @@ public class ResumenCuenta {
 		               .stream()
 		               .filter(c -> c.getPropietario().getCedula().equals(usuario.getPropietario().getCedula()))
 		               .findFirst().get();	   
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("cuenta", cuenta);
 			movimientosRealizados = cuenta.getListaTransacciones();
 			creditos = cuenta.getListaCreditos();
 			fechaFin = LocalDate.now();

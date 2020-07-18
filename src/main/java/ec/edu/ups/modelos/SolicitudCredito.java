@@ -12,10 +12,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -47,9 +49,10 @@ public class SolicitudCredito implements Serializable {
 	@Column(nullable = false)
 	private EstadoSolicitud estado;
 	
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "archivosAdjuntos", 
 	                 joinColumns = @JoinColumn(name = "solicitud_id"))
+	
 	private List<File> archivosAdjuntos;
 	
 	/**

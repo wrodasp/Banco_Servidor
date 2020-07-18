@@ -47,12 +47,12 @@
 								<h:form>
 									<h:outputLabel align="left"
 										style="margin-left: 5%; margin-top: 2%; margin-bottom: 1%;"
-										value="Ingrese el monto que desee pagar (Cuota completa o una parte):" /><br/>
-									<h:outputText value="#{resumenPago.monto}" style="margin-left: 5%; margin-top: 2%;"/>
+										value="Ingrese el monto que desee pagar (Cuota completa o una parte):" />
+									<h:inputText value="#{resumenPago.monto}" style="margin-left: 5%; margin-top: 2%;"/>
 									<h:commandButton class="btn btn-primary text-center"
 										             style="margin-left: 5%; margin-bottom: 1%;"
 									                 action="#{resumenPago.guardarPago()}" 
-									                 value="Debitar cuota" />
+									                 value="Pagar cuota" />
 								</h:form>
 							</div>
 						</div>

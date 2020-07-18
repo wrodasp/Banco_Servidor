@@ -148,6 +148,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception {
 		try {
 			cuota.abonar(monto);
+			credito.setSaldo(credito.getSaldo() + monto);
 			cuenta.retirarDinero(monto);
 			List<Cuota> listaCuotasActualizada = credito.getListaCuotas().stream().map(
 				aux -> aux.getId() == cuota.getId()? cuota : aux
@@ -169,6 +170,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			double montoAPagar = cuota.getMonto() - cuota.getSaldo();
 			cuota.abonar(montoAPagar);
 			cuota.setEstado(EstadoCuota.VENCIDA);
+			credito.setSaldo(credito.getMonto() - montoAPagar);
 			List<Cuota> listaActualizada = credito.getListaCuotas()
 				                              	  .stream()
 				                              	  .map(aux -> aux.getId() == cuota.getId()? cuota : aux)
