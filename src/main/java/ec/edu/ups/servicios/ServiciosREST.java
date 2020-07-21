@@ -107,4 +107,16 @@ public class ServiciosREST{
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	@GET
+	@Path(value = "/cambiarClave")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String retirar(@QueryParam("correo") String correo) throws Exception {
+		try {
+			sesion.cambiarClave(cliente.buscarUsuario(correo));
+			return "Clave cambiada";
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }
