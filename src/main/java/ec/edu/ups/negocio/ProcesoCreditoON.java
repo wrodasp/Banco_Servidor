@@ -22,6 +22,7 @@ import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.EstadoCuota;
 import ec.edu.ups.modelos.enums.EstadoSolicitud;
+import ec.edu.ups.modelos.enums.TipoTransaccion;
 
 /**
  * Esta clase funciona como fachada para 
@@ -112,6 +113,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	@Override
 	public void registrarCredito(Cuenta cuenta, Credito credito) throws Exception {
 		try {
+			credito.setSaldo(credito.getMonto());
 			credito.setListaCuotas(generarAmortizacion(credito));
 			cuenta.depositarDinero(credito.getMonto());
 			cuenta.getListaCreditos().add(credito);
@@ -134,6 +136,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			for(int i = 0; i < numeroMeses; i++) {
 				Cuota cuota = new Cuota();
 				cuota.setMonto(montoAPagarEnCuotas);
+				cuota.setSaldo(montoAPagarEnCuotas);
 				cuota.setFechaVencimiento(siguienteFecha);
 				siguienteFecha = siguienteFecha.plusMonths(1);
 				listaCuotas.add(cuota);
@@ -148,8 +151,11 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception {
 		try {
 			cuota.abonar(monto);
-			credito.setSaldo(credito.getSaldo() + monto);
+			credito.setSaldo(credito.getSaldo() - monto);
 			cuenta.retirarDinero(monto);
+			Transaccion transaccion = new Transaccion();
+			transaccion.setMonto(monto);
+			transaccion.setTipo(TipoTransaccion.PAGO_CUOTA);
 			List<Cuota> listaCuotasActualizada = credito.getListaCuotas().stream().map(
 				aux -> aux.getId() == cuota.getId()? cuota : aux
 			).collect(Collectors.toList());
@@ -158,6 +164,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 				aux -> aux.getId() == credito.getId()? credito : aux
 			).collect(Collectors.toList());
 			cuenta.setListaCreditos(listaCreditosActualizada);
+			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -166,17 +173,24 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	
 	public void debitarCuotaVencida(Cuenta cuenta, Credito credito, Cuota cuota) throws Exception {
 		try {
-			LocalDate fechaActual = LocalDate.now();
-			double montoAPagar = cuota.getMonto() - cuota.getSaldo();
-			cuota.abonar(montoAPagar);
-			cuota.setEstado(EstadoCuota.VENCIDA);
-			credito.setSaldo(credito.getMonto() - montoAPagar);
-			List<Cuota> listaActualizada = credito.getListaCuotas()
-				                              	  .stream()
-				                              	  .map(aux -> aux.getId() == cuota.getId()? cuota : aux)
-				                              	  .collect(Collectors.toList());
-			credito.setListaCuotas(listaActualizada);
-			cuentaDAO.modificar(cuenta);
+			if (cuenta.getSaldo() >= cuota.getSaldo()) {
+				LocalDate fechaActual = LocalDate.now();
+				double montoAPagar = cuota.getMonto() - cuota.getSaldo();
+				cuota.abonar(montoAPagar);
+				cuota.setEstado(EstadoCuota.PAGADA);
+				credito.setSaldo(credito.getMonto() - montoAPagar);
+				cuenta.retirarDinero(cuota.getMonto());
+				Transaccion transaccion = new Transaccion();
+				transaccion.setMonto(montoAPagar);
+				transaccion.setTipo(TipoTransaccion.DEBITO_AUTOMATICO);
+				List<Cuota> listaActualizada = credito.getListaCuotas()
+					                              	  .stream()
+					                              	  .map(aux -> aux.getId() == cuota.getId()? cuota : aux)
+					                              	  .collect(Collectors.toList());
+				credito.setListaCuotas(listaActualizada);
+				cuenta.getListaTransacciones().add(transaccion);
+				cuentaDAO.modificar(cuenta);
+			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}

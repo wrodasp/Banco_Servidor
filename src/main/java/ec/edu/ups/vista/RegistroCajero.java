@@ -1,6 +1,7 @@
 package ec.edu.ups.vista;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -61,7 +62,13 @@ public class RegistroCajero {
 	}
 	
 	public void obtenerCuenta() {
-		cuenta = procesoCajero.buscarCuenta(cuenta.getId());
+		try {
+			cuenta = procesoCajero.buscarCuenta(cuenta.getId());
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido encontrar la cuenta.", "")
+			);
+		}
 	}
 	
 	
@@ -69,8 +76,9 @@ public class RegistroCajero {
 		try {
 			procesoCajero.depositar(cuenta, transaccion.getMonto());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido realizar el deposito.", "")
+			);
 		}
 		return null;
 	}
@@ -79,8 +87,9 @@ public class RegistroCajero {
 		try {
 			procesoCajero.retirar(cuenta, transaccion.getMonto());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido realizar el retiro.", "")
+			);
 		}
 		return null;
 	}

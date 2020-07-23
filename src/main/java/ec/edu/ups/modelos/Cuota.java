@@ -125,8 +125,8 @@ public class Cuota implements Serializable {
 	 * Abona el monto especificado a la cuota.
 	 */
 	public void abonar(double monto) {
-	    saldo += monto;	
-		if (this.monto == saldo) {
+	    saldo -= monto;	
+		if (saldo <= 0) {
 			estado = EstadoCuota.PAGADA;
 		}
 	}

@@ -6,8 +6,7 @@ package ec.edu.ups.modelos.enums;
  **/
 public enum EstadoCuota {
 	PENDIENTE("Pendiente"),
-	PAGADA("Pagada"),
-	VENCIDA("Vencida");
+	PAGADA("Pagada");
 	
 	private String etiqueta;
 	

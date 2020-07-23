@@ -70,7 +70,8 @@ public class ResumenCuenta {
 		LocalDate fechaActual = LocalDate.now();
 		creditos.forEach(credito -> {
 			credito.getListaCuotas().forEach(cuota -> {
-				if (fechaActual.isAfter(cuota.getFechaVencimiento())) {
+				if (fechaActual.isEqual(cuota.getFechaVencimiento()) || 
+					fechaActual.isAfter(cuota.getFechaVencimiento())) {
 					try {
 						procesoCredito.debitarCuotaVencida(cuenta, credito, cuota);
 					} catch (Exception e) {
