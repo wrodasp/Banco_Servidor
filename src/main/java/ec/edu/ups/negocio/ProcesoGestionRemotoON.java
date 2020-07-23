@@ -55,7 +55,7 @@ public interface ProcesoGestionRemotoON {
 	 * @param cue_id
 	 * @return
 	 */
-	public List<Credito> listarCreditosCuenta(int cue_id);
+	public List<Credito> listarCreditosCuenta(int cue_id)  throws Exception;
 	
 	/**
 	 * Devuelve la lista de movimientos realizada dentro del rango de fechas especificado.

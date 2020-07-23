@@ -44,8 +44,12 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 	}
 
 	@Override
-	public Cuenta buscarCuenta(int numeroCuenta) {
-		return cuentaDAO.buscar(numeroCuenta);
+	public Cuenta buscarCuenta(int numeroCuenta) throws Exception {
+		try {
+			return cuentaDAO.buscar(numeroCuenta);
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public interface ProcesoCajeroLocalON {
 	/**
 	 * Busca la cuenta asociada al numero especificado.
 	 **/
-	public Cuenta buscarCuenta(int numeroCuenta);
+	public Cuenta buscarCuenta(int numeroCuenta) throws Exception;
 	
 	/**
 	 * Realiza el depósito del monto especificado en la cuenta.

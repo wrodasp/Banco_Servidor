@@ -60,15 +60,21 @@ public class CuentaDAO {
 	
 	/**
 	 * Busca la cuenta asociada al ID especificado en la base de datos.
+	 * @throws Exception 
 	 **/
-	public Cuenta buscar(int id) {
-		Cuenta cuenta = manager.find(Cuenta.class, id);
-		if (cuenta != null) {
-			cuenta.getListaCreditos().size();
-			cuenta.getListaSolicitudes().size();
-			cuenta.getListaTransacciones().size();
+	public Cuenta buscar(int id) throws Exception {
+		try {
+			System.out.println("Llega");
+			Cuenta cuenta = manager.find(Cuenta.class, id);
+			if (cuenta != null) {
+				cuenta.getListaCreditos().size();
+				cuenta.getListaSolicitudes().size();
+				cuenta.getListaTransacciones().size();
+			}
+			return cuenta;
+		} catch (Exception e) {
+			throw new Exception("Se ha producido un error al buscar la cuenta.");
 		}
-		return cuenta;
 	}
 	
 	/**

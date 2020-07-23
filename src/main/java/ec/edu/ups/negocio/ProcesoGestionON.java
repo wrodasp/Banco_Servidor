@@ -99,9 +99,13 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	}
 	
 	@Override
-	public List<Credito> listarCreditosCuenta(int cue_id) {
-		Cuenta cuenta = cuentaDAO.buscar(cue_id);
-		return cuenta.getListaCreditos();
+	public List<Credito> listarCreditosCuenta(int cue_id) throws Exception {
+		try {
+			Cuenta cuenta = cuentaDAO.buscar(cue_id);
+			return cuenta.getListaCreditos();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 	
 	@Override

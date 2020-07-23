@@ -63,12 +63,12 @@ public class ServiciosREST{
 	@GET
 	@Path(value = "/transferir")
 	@Produces(value = "application/json")
-	public boolean transferir(@QueryParam(value = "numeroCuentaOrigen") int numeroCuentaOrigen, 
-			                  @QueryParam(value = "numeroCuentaDestino") int numeroCuentaDestino, 
+	public String transferir(@QueryParam(value = "origen") int origen, 
+			                  @QueryParam(value = "destino") int destino, 
 			                  @QueryParam(value = "monto") double monto) throws Exception {
 		try {
-			cajero.transferir(cajero.buscarCuenta(numeroCuentaOrigen), cajero.buscarCuenta(numeroCuentaDestino), monto);
-			return true;
+			cajero.transferir(cajero.buscarCuenta(origen), cajero.buscarCuenta(destino), monto);
+			return "exitoso";
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -109,12 +109,23 @@ public class ServiciosREST{
 	}
 	
 	@GET
-	@Path(value = "/cambiarClave")
+	@Path("/cambiarClave")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String retirar(@QueryParam("correo") String correo) throws Exception {
+	public String cambiarClave(@QueryParam("correo") String correo) throws Exception {
 		try {
 			sesion.cambiarClave(cliente.buscarUsuario(correo));
 			return "Clave cambiada";
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	@GET
+	@Path("/getSaldo")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getSaldo(@QueryParam("cuenta") int cuenta) throws Exception {
+		try {
+			return String.valueOf(cajero.buscarCuenta(cuenta).getSaldo());
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
