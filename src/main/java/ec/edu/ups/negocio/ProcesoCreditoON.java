@@ -155,7 +155,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.retirarDinero(monto);
 			Transaccion transaccion = new Transaccion();
 			transaccion.setMonto(monto);
-			transaccion.setTipo(TipoTransaccion.PAGO_CUOTA);
+			transaccion.setTipo(cuota.getSaldo() <= 0? TipoTransaccion.PAGO_CUOTA : TipoTransaccion.ABONO_CUOTA);
 			List<Cuota> listaCuotasActualizada = credito.getListaCuotas().stream().map(
 				aux -> aux.getId() == cuota.getId()? cuota : aux
 			).collect(Collectors.toList());
@@ -177,7 +177,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 				LocalDate fechaActual = LocalDate.now();
 				double montoAPagar = cuota.getMonto() - cuota.getSaldo();
 				cuota.abonar(montoAPagar);
-				cuota.setEstado(EstadoCuota.PAGADA);
+				cuota.setEstado(cuota.getSaldo() <= 0? EstadoCuota.PAGADA : EstadoCuota.PENDIENTE);
 				credito.setSaldo(credito.getMonto() - montoAPagar);
 				cuenta.retirarDinero(cuota.getMonto());
 				Transaccion transaccion = new Transaccion();

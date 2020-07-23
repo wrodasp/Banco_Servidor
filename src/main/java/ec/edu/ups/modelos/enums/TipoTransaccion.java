@@ -7,6 +7,7 @@ package ec.edu.ups.modelos.enums;
 public enum TipoTransaccion {
 	DEPOSITO("Deposito"),
 	RETIRO("Retiro"),
+	ABONO_CUOTA("Abono de Cuota"),
 	PAGO_CUOTA("Pago de Cuota"),
 	DEBITO_AUTOMATICO("Debito de cuota automatico");
 	

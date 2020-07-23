@@ -62,8 +62,8 @@ public class ResumenPago {
 	
 	public void guardarPago() {
 		try {
-			if ((cuota.getSaldo() + monto) > cuota.getMonto()) {
-				procesoCredito.pagarCuota(cuenta, credito, cuota, cuota.getMonto() - cuota.getSaldo());
+			if (monto > cuota.getSaldo()) {
+				procesoCredito.pagarCuota(cuenta, credito, cuota, cuota.getSaldo());
 			} else {
 				procesoCredito.pagarCuota(cuenta, credito, cuota, monto);
 			}

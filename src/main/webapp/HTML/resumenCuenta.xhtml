@@ -60,7 +60,7 @@
 						<h:dataTable id="movimientos" value="#{resumenCuenta.movimientosRealizados}" var="transaccion" class="table">
 								<h:column class="span7">
 									<f:facet name="header">Tipo</f:facet>
-									<label class="text-center">#{transaccion.tipo}</label>
+									<label class="text-center">#{transaccion.tipo.etiqueta}</label>
 								</h:column>
 								<h:column class="span7">
 									<f:facet name="header">Monto</f:facet>
