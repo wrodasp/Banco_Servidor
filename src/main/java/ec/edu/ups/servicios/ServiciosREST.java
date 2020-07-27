@@ -34,7 +34,7 @@ public class ServiciosREST{
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Credito> getCreditos(@QueryParam("cue_id") int cue_id) throws Exception {
 		try {
-			return cliente.listarCreditosCuenta(cue_id);
+			return cajero.buscarCuenta(cue_id).getListaCreditos();
 		} catch (Exception e) {
 			throw new Exception("Se ah producido un error"+e.getMessage());
 		}

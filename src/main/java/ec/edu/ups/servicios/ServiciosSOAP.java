@@ -1,8 +1,12 @@
 package ec.edu.ups.servicios;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+
+import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
