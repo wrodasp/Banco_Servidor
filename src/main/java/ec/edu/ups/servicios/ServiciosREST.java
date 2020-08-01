@@ -130,4 +130,15 @@ public class ServiciosREST{
 			throw new Exception(e.getMessage());
 		}
 	}
+	
+	@GET
+	@Path("/getUsuarios")
+	@Produces(MediaType.TEXT_PLAIN)
+	public List<Usuario> getUsuarios() throws Exception {
+		try {
+			return cliente.listarUsuarios();
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
 }

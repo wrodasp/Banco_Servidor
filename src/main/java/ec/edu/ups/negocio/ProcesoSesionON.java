@@ -48,9 +48,9 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 					                         "tienes accesso entonces acercate a una sucursal " +
 			                                 "de MashiBank y pide que generen una nueva clave " +
 					                         "para ti.";
-			//UtilidadCorreo.enviarCorreo(correo, "Intento de inicio de sesión", 
-			//	mensajeNotificado + "\n\n" + extra
-			//);
+			UtilidadCorreo.enviarCorreo(correo, "Intento de inicio de sesión", 
+				mensajeNotificado + "\n\n" + extra
+			);
 			return estadoSesion? usuario: null;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
