@@ -36,7 +36,12 @@ public class RegistroUsuario {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
 			}
 		} catch (Exception e) {
-			
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml?faces-redirect=true");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 	}
 	

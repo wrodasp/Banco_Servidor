@@ -58,7 +58,7 @@ public class LoginUsuario {
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido iniciar sesion.", "")
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido iniciar sesion. "+e.getMessage(), "")
 			);
 		}
 	}

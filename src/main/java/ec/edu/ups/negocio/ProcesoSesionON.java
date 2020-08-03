@@ -68,6 +68,10 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 					"Has intentado iniciar sesión el " + notificacion.getFecha().toString() + ".\n\n" +
 					"Estado: " + (exitoso? "EXITOSO": "FALLIDO")
 			);
+			if(usuario==null)
+			{
+				throw new Exception("No existe el correo.");
+			}
 			UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "Notificación de intento de sesión.", notificacion.getMensaje());
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
