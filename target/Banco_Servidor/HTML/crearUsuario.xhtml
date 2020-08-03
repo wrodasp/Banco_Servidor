@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough">
+<h:head>
+	<title>Mashi Bank</title>
+</h:head>
+<ui:composition template="plantillaAdmin.xhtml">
+	<body>
+		<ui:define name="formAdmin">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="widget-box">
+						<div class="widget-content nopadding" style="color: black">
+						<h3 class="box-title" align="center">Nuevo Usuario</h3>
+						<div align="center">
+						<h:form id="formulario" class="form-group">
+							<div class="col col-md-auto">
+								<h:messages class="alert text-center" />
+								<h:outputLabel value="Cedula:" for="txtCedula" />
+								<h:inputText id="txtCedula" value="#{registroUsuario.persona.cedula}"
+									maxlength="10">
+									<f:validateLength minimum="10" />
+									<f:validateRequired />
+								</h:inputText>
+								<br /> <br />
+								<h:outputLabel value="Nombre:" for="txtNombre" />
+								<h:inputText id="txtNombre" value="#{registroUsuario.persona.nombre}">
+									<f:validateRequired />
+								</h:inputText>
+								<br /> <br />
+								<h:outputLabel value="Apellido:" for="txtApellido" />
+								<h:inputText id="txtApellido" value="#{registroUsuario.persona.apellido}">
+									<f:validateRequired />
+								</h:inputText>
+								<br /> <br />
+								<h:outputLabel value="Correo:" for="txtCorreo" />
+								<h:inputText id="txtCorreo" value="#{registroUsuario.usuario.correo}">
+									<f:validateRequired />
+								</h:inputText>
+								<br /> <br />
+								<h:outputLabel value="Rol:" for="menuRol" />
+								<h:selectOneMenu id="menuRol" value="#{registroUsuario.usuario.rol}">
+									<f:selectItems value="#{registroUsuario.tiposUsuario}"
+										var="rol" itemValue="#{rol}" itemLabel="#{rol.etiqueta}" />
+								</h:selectOneMenu>
+								<br /> <br />
+								<h:commandButton id="btnRegistrar" class = "span2" style="margin-bottom: 2%;"
+									action="#{registroUsuario.registrar()}"
+									value="Guardar" update="formulario" />
+							</div>
+						</h:form>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>			
+		</ui:define>
+	</body>
+</ui:composition>
+</html>

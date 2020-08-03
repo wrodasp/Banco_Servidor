@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Mashi Bank</title>
+</h:head>
+<ui:composition template="plantillaSesionUsuario.xhtml">
+	<body>
+		<ui:define name="formCuenta">
+			<div class="container-fluid">
+				<h3 class="text-center" style="margin-top: 3%">Información de crédito</h3>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding" style="color: black">
+								<div align="center" style="margin-top: 2%">
+									<h:outputLabel value="Monto: #{resumenCuotas.credito.monto}"
+										class="text-left" style="margin-left:5%;" />
+									<br/>
+									<h:outputLabel
+										value="Saldo: #{resumenCuotas.credito.saldo}"
+										class="text-left" style="margin-left:5%;" />
+									<br/>
+									<h:outputLabel
+										value="Fecha de vencimiento: #{resumenCuotas.credito.fechaVencimiento.format(resumenCuenta.formatoFecha)}"
+										class="text-left" style="margin-left:5%;" />
+									<br/>
+									<h:outputLabel
+										value="Tipo: #{resumenCuotas.credito.tipo.etiqueta}"
+										class="text-left" style="margin-left:5%;" />
+									<br/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding" style="">
+								<h:form>
+									<h5 align="left"
+										style="margin-left: 5%; margin-top: 2%; margin-bottom: 1%;">
+										Lista de cuotas
+									</h5>
+									<div
+										style="position: relative; height: 30%; overflow: auto; display: block; margin-left: 5%; margin-right: 5%; margin-bottom: 2%;">
+										<h:dataTable id="cuotas"
+											value="#{resumenCuotas.credito.listaCuotas}" var="cuota"
+											class="table">
+											<h:column class="span7">
+												<f:facet name="header">Monto</f:facet>
+												<label class="text-center">#{cuota.monto}</label>
+											</h:column>
+											<h:column class="span7">
+												<f:facet name="header">Saldo</f:facet>
+												<label class="text-center">#{cuota.saldo}</label>
+											</h:column>
+											<h:column class="span7">
+												<f:facet name="header">Fecha de Vencimiento</f:facet>
+												<label class="text-center">#{cuota.fechaVencimiento.format(resumenCuenta.formatoFecha)}</label>
+											</h:column>
+											<h:column class="span7">
+												<h:commandButton class="text-center"
+												 				 rendered="#{cuota.estado.ordinal() == 0}" 
+												                 action="#{resumenCuotas.verDetalleCuota(cuota)}" 
+												                 value="Pagar" />
+											</h:column>
+										</h:dataTable>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</body>
+</ui:composition>
+</html>

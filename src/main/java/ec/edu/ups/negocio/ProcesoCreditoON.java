@@ -23,6 +23,7 @@ import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.EstadoCuota;
 import ec.edu.ups.modelos.enums.EstadoSolicitud;
 import ec.edu.ups.modelos.enums.TipoTransaccion;
+import ec.edu.ups.utilidades.UtilidadCorreo;
 
 /**
  * Esta clase funciona como fachada para 
@@ -102,6 +103,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 					"Observaciones: " + observaciones + "\n\n"
 				);
 			}
+			UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "Cambio de estado de solicitud", notificacion.getMensaje());
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
@@ -189,6 +191,25 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 					                              	  .collect(Collectors.toList());
 				credito.setListaCuotas(listaActualizada);
 				cuenta.getListaTransacciones().add(transaccion);
+				List<Credito> listaActualizadaCredito = cuenta.getListaCreditos()
+	                  	  .stream()
+	                  	  .map(aux -> aux.getId() == credito.getId()? credito : aux)
+	                  	  .collect(Collectors.toList());
+				cuenta.setListaCreditos(listaActualizadaCredito);
+				cuentaDAO.modificar(cuenta);
+			}
+			else {
+				cuota.setEstado(EstadoCuota.VENCIDA);
+				List<Cuota> listaActualizada = credito.getListaCuotas()
+                    	  .stream()
+                    	  .map(aux -> aux.getId() == cuota.getId()? cuota : aux)
+                    	  .collect(Collectors.toList());
+				credito.setListaCuotas(listaActualizada);
+				List<Credito> listaActualizadaCredito = cuenta.getListaCreditos()
+	                  	  .stream()
+	                  	  .map(aux -> aux.getId() == credito.getId()? credito : aux)
+	                  	  .collect(Collectors.toList());
+				cuenta.setListaCreditos(listaActualizadaCredito);
 				cuentaDAO.modificar(cuenta);
 			}
 		} catch (Exception e) {

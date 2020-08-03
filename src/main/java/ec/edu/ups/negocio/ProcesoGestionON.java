@@ -50,7 +50,7 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 					     "con la clave: " + usuario.getClave() + " para ingresar " +
 			             "a tu cuenta de usuario en el sitio web www.mashibank.com.\n\n" +
 					     "Agredecemos tu afiliación a nosotros.";
-				//UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta de usuario", mensaje);
+				UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "MashiBank - Creación de cuenta de usuario", mensaje);
 			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

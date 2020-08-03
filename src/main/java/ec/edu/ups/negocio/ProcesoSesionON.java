@@ -41,16 +41,8 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		try {
 			Usuario usuario = usuarioDAO.buscar(correo);
 			boolean estadoSesion = usuario.getClave().equals(clave);
-			String mensajeNotificado = notificarIntentoSesion(usuario, estadoSesion);
+			notificarIntentoSesion(usuario, estadoSesion);
 			registrarIntentoSesion(usuario, estadoSesion);
-			String extra = estadoSesion? "": "Has sido tú?. Si no, entonces genera una " +
-			                                 "nueva clave desde de cuenta online. Si no " +
-					                         "tienes accesso entonces acercate a una sucursal " +
-			                                 "de MashiBank y pide que generen una nueva clave " +
-					                         "para ti.";
-			UtilidadCorreo.enviarCorreo(correo, "Intento de inicio de sesión", 
-				mensajeNotificado + "\n\n" + extra
-			);
 			return estadoSesion? usuario: null;
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
@@ -62,6 +54,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		try {
 			usuario.setClave(GeneradorClave.getNuevaClave(8));
 			usuarioDAO.modificar(usuario);
+			UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "Cambio de clave", "Se ha generado su nueva clave: \n"+usuario.getClave());
 		} catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -75,6 +68,7 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 					"Has intentado iniciar sesión el " + notificacion.getFecha().toString() + ".\n\n" +
 					"Estado: " + (exitoso? "EXITOSO": "FALLIDO")
 			);
+			UtilidadCorreo.enviarCorreo(usuario.getCorreo(), "Notificación de intento de sesión.", notificacion.getMensaje());
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
 			return notificacion.getMensaje();

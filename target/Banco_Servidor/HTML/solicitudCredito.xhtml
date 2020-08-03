@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Mashi Bank</title>
+</h:head>
+<ui:composition template="plantillaSesionUsuario.xhtml">
+	<body>
+		<ui:define name="formCuenta">
+			<div class="container-fluid">
+				<h3 class="text-center" style="margin-top: 3%">Nueva solicitud</h3>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding" style="">
+								<h:messages class="alert text-center"/>
+								<h:form enctype="multipart/form-data">
+									<label style="margin-left: 5%; margin-top:2%;"> 
+										Fecha: #{formularioSolicitud.solicitud.fecha.format(resumenCuenta.formatoFecha)}
+								    </label>
+									<p style="margin-left: 5%;">
+										Yo, #{formularioSolicitud.cuenta.propietario.toString()}, portador
+										de la cedula de identidad Nro #{formularioSolicitud.cuenta.propietario.cedula},
+										solicito de la manera mas comedida se me conceda el credito de
+										<h:inputText style="margin-left: 5px;"
+													 value="#{formularioSolicitud.solicitud.montoSolicitado}">
+											<f:validateRequired />
+										</h:inputText>$.
+									</p><br/>
+									<label style="margin-left: 5%;">Motivos:</label><br/><br/>
+									<h:inputTextarea style="margin-left: 5%; width:90%;"
+													 value="#{formularioSolicitud.motivos}" >
+										<f:validateRequired />
+									</h:inputTextarea><br/><br/>
+									<label style="margin-left: 5%;">
+										Archivos adjuntos (Copia de la cedula, Planilla basica y Rol de Pagos) (Maximo 3):
+									</label>
+									<p:fileUpload style="margin-left: 5%; margin-right:5%; width:85%"
+												  value="#{formularioSolicitud.adjuntos}"
+									              mode="simple" multiple="true" auto="true"
+									              dragDropSupport="false"
+									              fileLimit="3">
+									</p:fileUpload><br/><br/>
+									<h:commandButton style="margin-left: 5%; margin-bottom:2%"
+													 class="btn btn-primary"
+													 actionListener="#{formularioSolicitud.enviarSolicitud()}" 
+													 value="Enviar" />
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</body>
+</ui:composition>
+</html>

@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passth/rough"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Mashi Bank</title>
+</h:head>
+<ui:composition template="plantillaSesionUsuario.xhtml">
+	<body>
+		<ui:define name="formCuenta">
+			<div class="container-fluid">
+				<h3 class="text-center" style="margin-top: 3%">Cuenta de Ahorro</h3>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding" style="color: black">
+								<div align="center" style="margin-top: 2%">
+									<h:messages id="mensajes"/>
+									<h:outputLabel
+										value="Fecha de vencimiento: #{resumenPago.cuota.fechaVencimiento.format(resumenCuenta.formatoFecha)}"
+										class="text-left" style="margin-left:5%;" />
+									<br />
+									<h:outputLabel value="Monto: #{resumenPago.cuota.monto}"
+										class="text-left" style="margin-left:5%;" />
+									<br />
+									<h:outputLabel
+										value="Saldo: #{resumenPago.cuota.saldo}"
+										class="text-left" style="margin-left:5%;" />
+									<br />
+									<h:outputLabel
+										value="Estado: #{resumenPago.cuota.estado}"
+										class="text-left" style="margin-left:5%;" />
+									<br />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding" style="">
+								<h:form>
+									<h:outputLabel align="left"
+										style="margin-left: 5%; margin-top: 2%; margin-bottom: 1%;"
+										value="Ingrese el monto que desee pagar (Cuota completa o una parte):" />
+									<h:inputText value="#{resumenPago.monto}" style="margin-left: 5%; margin-top: 2%;"/>
+									<h:commandButton class="btn btn-primary text-center"
+										             style="margin-left: 5%; margin-bottom: 1%;"
+									                 action="#{resumenPago.guardarPago()}" 
+									                 value="Pagar cuota" />
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</body>
+</ui:composition>
+</html>
