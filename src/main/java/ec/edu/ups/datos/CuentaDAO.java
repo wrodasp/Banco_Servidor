@@ -36,19 +36,25 @@ public class CuentaDAO {
 	 * Actualiza la cuenta especificada en la base de datos.
 	 **/
 	public void modificar(Cuenta cuenta) {
-		cuenta.getListaCreditos().forEach(credito -> {
-			Credito aux = manager.find(Credito.class, credito.getId());
-			if (aux != null) {
-				System.out.println("Existe el credito");
-				credito.getListaCuotas().forEach(cuota -> {
-					manager.merge(cuota);
+		try {
+			if (buscar(cuenta.getId()) != null) {
+		    	cuenta.getListaCreditos().forEach(credito -> {
+					Credito aux = manager.find(Credito.class, credito.getId());
+					if (aux != null) {
+						credito.getListaCuotas().forEach(cuota -> {
+							manager.merge(cuota);
+						});
+						manager.merge(credito);
+					} else {
+						manager.persist(credito);
+					}
 				});
-				manager.merge(credito);
-			} else {
-				manager.persist(credito);
-			}
-		});
-		manager.merge(cuenta);
+				manager.merge(cuenta); 	   
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    
 	}
 	
 	/**
