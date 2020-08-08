@@ -64,7 +64,6 @@ public class CuentaDAO {
 	 **/
 	public Cuenta buscar(int id) throws Exception {
 		try {
-			System.out.println("Llega");
 			Cuenta cuenta = manager.find(Cuenta.class, id);
 			if (cuenta != null) {
 				cuenta.getListaCreditos().size();
