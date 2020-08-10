@@ -23,9 +23,6 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 	@Inject 
 	private CuentaDAO cuentaDAO;
 	
-	@Inject
-	private UsuarioDAO usuarioDAO;
-	
 	/**
 	 * Crea una nueva instancia de la clase ProcesoCajeroON. 
 	 */
@@ -39,7 +36,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuenta.setPropietario(propietario);
 			depositar(cuenta, montoInicial);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido abrir la cuenta.\nERROR: " + e.getMessage());
 		}
 	}
 
@@ -48,7 +45,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 		try {
 			return cuentaDAO.buscar(numeroCuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido encontrar la cuenta.\nERROR: " + e.getMessage());
 		}
 	}
 	
@@ -67,7 +64,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido depositar el dinero.\nERROR: " + e.getMessage());
 		}
 	}
 
@@ -84,7 +81,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido retirar el dinero.\nERROR: " + e.getMessage());
 		}
 	}
 

@@ -59,7 +59,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.getListaSolicitudes().add(solicitud);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido enviar la solicitud.\nERROR: " + e.getMessage());
 		}
 		
 	}
@@ -73,7 +73,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.setListaSolicitudes(listaActualizada);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido cambir el estado de la solicitud.\nERROR: " + e.getMessage());
 		}
 		
 	}
@@ -107,7 +107,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			usuario.getListaNotificaciones().add(notificacion);
 			usuarioDAO.modificar(usuario);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido enviar el correo electrónico.\nERROR: " + e.getMessage());
 		}
 		
 	}
@@ -121,7 +121,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.getListaCreditos().add(credito);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se pudo registrar el credito.\nERROR: " + e.getMessage());
 		}
 	}
 
@@ -145,7 +145,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			}
 			return listaCuotas;
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("No se ha podido generar la amortizacion.\nERROR: " + e.getMessage());
 		}
 	}
 	
@@ -169,7 +169,7 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 			cuenta.getListaTransacciones().add(transaccion);
 			cuentaDAO.modificar(cuenta);
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception(".\nERROR: " + e.getMessage());
 		}
 	}
 	

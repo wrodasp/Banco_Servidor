@@ -70,7 +70,7 @@ public class ServiciosREST{
 			cajero.transferir(cajero.buscarCuenta(origen), cajero.buscarCuenta(destino), monto);
 			return "exitoso";
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			return e.getMessage();
 		}
 	}
 	
