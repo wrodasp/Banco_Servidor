@@ -22,6 +22,9 @@ import ec.edu.ups.utilidades.GeneradorClave;
 import ec.edu.ups.utilidades.UtilidadCorreo;
 
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase funciona como fachada para 
  * realizar las operaciones de un 
  * proceso de gestión.
@@ -38,6 +41,10 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 	public ProcesoGestionON() {
 	}
 	
+	/**
+	 * Metodo que permite crear un usuario y notificar al cliente en su correo
+	 * electronico, enviandole su contraseña
+	 */
 	@Override
 	public void registrarUsuario(Persona cliente, Usuario usuario) throws Exception {
 		try {
@@ -57,6 +64,10 @@ public class ProcesoGestionON implements ProcesoGestionRemotoON, ProcesoGestionL
 		}
 	}
 
+	/**
+	 * Logica que devuelve un usuario desde la base de datos por medio de 
+	 * su correo electronico
+	 */
 	@Override
 	public Usuario buscarUsuario(String correo) throws Exception {
 		try {

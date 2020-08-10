@@ -17,8 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ec.edu.ups.modelos.enums.EstadoCuota;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
  * Esta clase permite guardar datos 
  * referentes a una Cuota.
  */

@@ -13,7 +13,11 @@ import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 
-
+/**
+ * Bean para usuario rol cajero
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class RegistroCajero {

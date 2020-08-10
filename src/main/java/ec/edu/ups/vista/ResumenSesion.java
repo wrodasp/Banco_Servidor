@@ -8,6 +8,11 @@ import javax.faces.context.FacesContext;
 import ec.edu.ups.modelos.RegistroSesion;
 import ec.edu.ups.modelos.Usuario;
 
+/**
+ * Bean resumen de sesion
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class ResumenSesion {

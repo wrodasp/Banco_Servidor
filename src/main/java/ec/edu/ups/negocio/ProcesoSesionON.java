@@ -16,6 +16,9 @@ import ec.edu.ups.utilidades.GeneradorClave;
 import ec.edu.ups.utilidades.UtilidadCorreo;
 
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase funciona como fachada para 
  * realizar las operaciones de un 
  * proceso de sesión.
@@ -49,6 +52,10 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		}
 	}
 	
+	/**
+	 * Logica que permite el cambio de contraseña,
+	 * que despues sera enviado a su correo
+	 */
 	@Override
 	public void cambiarClave(Usuario usuario) throws Exception {
 		try {
@@ -60,6 +67,10 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		}
 	}
 	
+	/**
+	 * Metodo que notifica al usuario a su correo el ingreso
+	 * al sistema
+	 */
 	@Override
 	public String notificarIntentoSesion(Usuario usuario, boolean exitoso) throws Exception {
 		try {
@@ -81,6 +92,9 @@ public class ProcesoSesionON implements ProcesoSesionRemotaON, ProcesoSesionLoca
 		}
 	}
 	
+	/**
+	 * Metodo que registra inicio de sesion en la base de datos
+	 */
 	@Override
 	public void registrarIntentoSesion(Usuario usuario, boolean exitoso) throws Exception {
 		try {

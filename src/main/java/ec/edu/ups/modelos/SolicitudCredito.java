@@ -22,8 +22,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import ec.edu.ups.modelos.enums.EstadoSolicitud;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite guardar datos 
  * referentes a una solicitud de Crédito.
  */

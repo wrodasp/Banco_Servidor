@@ -11,8 +11,10 @@ import ec.edu.ups.modelos.Cuenta;
 import ec.edu.ups.modelos.Persona;
 import ec.edu.ups.modelos.Transaccion;
 import ec.edu.ups.modelos.enums.TipoTransaccion;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase funciona como fachada para 
  * realizar las operaciones de un 
  * proceso de cajero.
@@ -22,6 +24,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 
 	@Inject 
 	private CuentaDAO cuentaDAO;
+
 	
 	/**
 	 * Crea una nueva instancia de la clase ProcesoCajeroON. 
@@ -40,6 +43,10 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 		}
 	}
 
+	
+	/**
+	 * Metodo devuelve una cuenta por meido de un parametro numero de cuenta
+	 */
 	@Override
 	public Cuenta buscarCuenta(int numeroCuenta) throws Exception {
 		try {
@@ -49,11 +56,18 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 		}
 	}
 	
+	
+	/**
+	 * Metodo que devuelve una cuenta por su numero de cuenta
+	 */
 	@Override
 	public int buscarCuentaCedula(String cedula) {
 		return cuentaDAO.buscarCedula(cedula);
 	}
 	
+	/**
+	 * Metodo que permite depositar un monto en una cuenta destino 
+	 */
 	@Override
 	public void depositar(Cuenta cuenta, double monto) throws Exception {
 		try {
@@ -70,6 +84,7 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 
 	/**
 	 * Lógica para débitos
+	 * Metodo que permite retirar dinero de una cuenta
 	 */
 	@Override
 	public void retirar(Cuenta cuenta, double monto) throws Exception {
@@ -85,6 +100,9 @@ public class ProcesoCajeroON implements ProcesoCajeroRemotoON, ProcesoCajeroLoca
 		}
 	}
 
+	/**
+	 * Metodo que permite transferir un monto de una cuenta a otra
+	 */
 	@Override
 	public void transferir(Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto) throws Exception {
 		try {

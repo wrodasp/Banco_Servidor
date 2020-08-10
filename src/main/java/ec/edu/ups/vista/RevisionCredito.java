@@ -26,6 +26,11 @@ import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoCreditoLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
+/**
+ * Bean permite visualizar estado credito
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class RevisionCredito {

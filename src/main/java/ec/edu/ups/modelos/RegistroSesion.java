@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite guardar datos 
  * referentes a un registro de Sesión.
  */

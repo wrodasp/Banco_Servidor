@@ -18,8 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ec.edu.ups.modelos.enums.TipoCredito;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite guardar datos 
  * referentes a un credito.
  **/

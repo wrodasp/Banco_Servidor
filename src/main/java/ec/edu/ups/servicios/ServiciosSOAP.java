@@ -9,8 +9,10 @@ import javax.jws.WebService;
 import ec.edu.ups.modelos.Credito;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite define un servicio
  * web para el sistema bancario.
  */

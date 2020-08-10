@@ -21,6 +21,11 @@ import ec.edu.ups.modelos.enums.TipoTransaccion;
 import ec.edu.ups.negocio.ProcesoCreditoLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
+/**
+ * Bean para mostrar cuenta
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class ResumenCuenta {

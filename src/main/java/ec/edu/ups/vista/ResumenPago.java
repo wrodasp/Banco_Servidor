@@ -13,6 +13,11 @@ import ec.edu.ups.modelos.Cuota;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.negocio.ProcesoCreditoLocalON;
 
+/**
+ *  Bean historial de pagols
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class ResumenPago {

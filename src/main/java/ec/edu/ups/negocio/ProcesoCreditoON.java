@@ -26,6 +26,9 @@ import ec.edu.ups.modelos.enums.TipoTransaccion;
 import ec.edu.ups.utilidades.UtilidadCorreo;
 
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase funciona como fachada para 
  * realizar las operaciones de un 
  * proceso de credito.
@@ -45,6 +48,11 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 	public ProcesoCreditoON() {
 	}
 	
+	/**
+	 * Logica que permite al cliente solicitar un credito al banco
+	 * por el cual le permite llenar un formulario y adjuntar documentso
+	 * para posterior aprobacion
+	 */
 	@Override
 	public void solicitarCredito(Cuenta cuenta, SolicitudCredito solicitud, String extra) throws Exception {
 		try {
@@ -64,6 +72,11 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		
 	}
 
+	
+	/**
+	 * Metodo que permite cambiar el estado de una solicitud de credito
+	 * 
+	 */
 	@Override
 	public void cambiarEstadoSolicitud(Cuenta cuenta, SolicitudCredito solicitud) throws Exception {
 		try {
@@ -78,6 +91,10 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		
 	}
 
+	
+	/**
+	 * Metodo que le notifica al cliente acercade una solicitud de credito
+	 */
 	@Override
 	public void notificarSobreSolicitud(Usuario usuario, SolicitudCredito solicitud, String observaciones) throws Exception {
 		try {
@@ -112,6 +129,9 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		
 	}
 
+	/**
+	 * Metodo que permite registrar un credito en la tabla de creditos
+	 */
 	@Override
 	public void registrarCredito(Cuenta cuenta, Credito credito) throws Exception {
 		try {
@@ -149,6 +169,10 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		}
 	}
 	
+	
+	/**
+	 * Logica que permite pagar una cuota del credito al cliente
+	 */
 	@Override
 	public void pagarCuota(Cuenta cuenta, Credito credito, Cuota cuota, double monto) throws Exception {
 		try {
@@ -173,6 +197,10 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		}
 	}
 	
+	
+	/**
+	 * Metodo que permite debitar al cliente una cuota de un credito
+	 */
 	public void debitarCuotaVencida(Cuenta cuenta, Credito credito, Cuota cuota) throws Exception {
 		try {
 			if (cuenta.getSaldo() >= cuota.getSaldo()) {
@@ -217,6 +245,9 @@ public class ProcesoCreditoON implements ProcesoCreditoRemotoON, ProcesoCreditoL
 		}
 	}
 	
+	/**
+	 * Logica que permite obtener una lista de creditos
+	 */
 	@Override
 	public List<Credito> listarCreditos(Cuenta cuenta) {
 		return cuenta.getListaCreditos();	

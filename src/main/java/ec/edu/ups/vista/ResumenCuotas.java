@@ -10,6 +10,11 @@ import ec.edu.ups.modelos.Cuota;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.EstadoCuota;
 
+/**
+ * Bean permite el pago de cuotas
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class ResumenCuotas {

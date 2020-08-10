@@ -12,6 +12,11 @@ import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 
+/**
+ * Bean para usuarios
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class RegistroUsuario {

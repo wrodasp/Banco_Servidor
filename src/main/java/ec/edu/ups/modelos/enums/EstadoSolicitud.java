@@ -1,6 +1,8 @@
 package ec.edu.ups.modelos.enums;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Este enum guarda las constantes 
  * para los posibles estados de una SolicitudCredito. 
  **/

@@ -11,6 +11,11 @@ import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
+/**
+ * bean loguear credito
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @SessionScoped
 public class LoginUsuario {

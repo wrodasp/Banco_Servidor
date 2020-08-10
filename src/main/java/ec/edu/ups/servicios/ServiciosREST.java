@@ -17,6 +17,13 @@ import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
 import ec.edu.ups.negocio.ProcesoSesionLocalON;
 
+/**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
+ * Esta clase permite definir un servicio web
+ * bancario de tipo REST
+ */
 @Path("/cliente")
 public class ServiciosREST{
 
@@ -29,6 +36,12 @@ public class ServiciosREST{
 	@Inject
 	private ProcesoGestionLocalON cliente;
 	
+	/**
+	 * Servicio que permite obetener los creditos de un usuario
+	 * @param cue_id parametro por numero de cuenta
+	 * @return lista de creditos
+	 * @throws Exception en caso de que no se ejecute  la transaccion correctamente
+	 */
 	@GET
 	@Path("/getCreditos")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +54,14 @@ public class ServiciosREST{
 	}
 		
 	/**
+	 * 
+	 */
+	/**
 	 * Devuelve un valor booleano que indica si el inicio de sesion fue exitoso.
+	 * @param user parametro usuario
+	 * @param clave parametro contraseña
+	 * @return mensaje de exito o falla
+	 * @throws Exception en caso de que el inicio de sesion sea fallido
 	 */
 	@GET
 	@Path("/loguear")
@@ -60,6 +80,15 @@ public class ServiciosREST{
 	 * Devuelve un valor booleano que indica si la transferencia de 
 	 * de la cuenta de origen a la cuenta de destino fue exitosa.
 	 */
+	/***
+	 * Devuelve un valor booleano que indica si la transferencia de 
+	 * de la cuenta de origen a la cuenta de destino fue exitosa.
+	 * @param origen parametro cuenta que va a transferir
+	 * @param destino cuenta a la que sera transferido
+	 * @param monto parametro cantidad
+	 * @return string en caso de que sea exitoso o fallido
+	 * @throws Exception
+	 */
 	@GET
 	@Path(value = "/transferir")
 	@Produces(value = "application/json")
@@ -75,8 +104,15 @@ public class ServiciosREST{
 	}
 	
 	/**
+	 * 
+	 */
+	/**
 	 * Devuelve un valor booleano que indica si el deposito 
 	 * a la cuenta de destino fue exitosa.
+	 * @param numeroCuenta numero de cuenta del usuario
+	 * @param monto cantidad de la transaccion
+	 * @return booleano true cuando fue exitoso
+	 * @throws Exception
 	 */
 	@GET
 	@Path(value = "/depositar")
@@ -92,8 +128,15 @@ public class ServiciosREST{
 	}
 	
 	/**
+	 * 
+	 */
+	/**
 	 * Devuelve un valor booleano que indica si el retiro
 	 * de la cuenta destino fue exitosa.
+	 * @param numeroCuenta parametro numero de cuenta usuario
+	 * @param monto cantidad a retirar en la transaccion
+	 * @return booleano true si es que se realizo correctamente
+	 * @throws Exception
 	 */
 	@GET
 	@Path(value = "/retirar")
@@ -108,6 +151,13 @@ public class ServiciosREST{
 		}
 	}
 	
+	
+	/**
+	 * Logica que permite hacer el cambio de contraseña a un usuario
+	 * @param correo parameetro correo electronico del usuario
+	 * @return String en caso de que fue exitoso o fallido el cambio de clave
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/cambiarClave")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -120,6 +170,12 @@ public class ServiciosREST{
 		}
 	}
 	
+	/**
+	 * Parametro que permite obtener el saldo de una cuenta
+	 * @param cuenta objeto de tipo cuenta
+	 * @return String con el salgo de la cuenta
+	 * @throws Exception en caso de que exista un error
+	 */
 	@GET
 	@Path("/getSaldo")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -131,6 +187,11 @@ public class ServiciosREST{
 		}
 	}
 	
+	/**
+	 * Logica que devuelve una lista de tipo Usuario
+	 * @return lista de tipo usuario
+	 * @throws Exception en caso de que exista error
+	 */
 	@GET
 	@Path("/getUsuarios")
 	@Produces(MediaType.TEXT_PLAIN)

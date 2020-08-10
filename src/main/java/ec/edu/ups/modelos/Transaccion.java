@@ -13,8 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import ec.edu.ups.modelos.enums.TipoTransaccion;
-
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite guardar datos 
  * referentes a una Transacción.
  */

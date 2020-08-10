@@ -22,6 +22,12 @@ import ec.edu.ups.modelos.SolicitudCredito;
 import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.negocio.ProcesoCreditoLocalON;
 
+/**
+ * Bean formulario solicitud
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
+
 @ManagedBean
 @ViewScoped
 public class FormularioSolicitud {

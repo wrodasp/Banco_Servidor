@@ -1,6 +1,9 @@
 package ec.edu.ups.utilidades;
 
 /**
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+ *
  * Esta clase permite generar claves.
  */
 public class GeneradorClave {

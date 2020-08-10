@@ -12,7 +12,11 @@ import ec.edu.ups.modelos.Usuario;
 import ec.edu.ups.modelos.enums.TipoUsuario;
 import ec.edu.ups.negocio.ProcesoCajeroLocalON;
 import ec.edu.ups.negocio.ProcesoGestionLocalON;
-
+/**
+ * Bean para usuario rol cliente
+ * 
+ * @author BenavidesJuan, CalvaByron, RodasWilson
+*/
 @ManagedBean
 @ViewScoped
 public class RegistroCliente {
